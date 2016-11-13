@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  number: 1
+  waiter: one
+
+two:
+  code: MyString
+  number: 1
+  waiter: two

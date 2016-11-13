@@ -1,0 +1,9 @@
+<% @tables.each do |t| %>
+	<%= t.number %> - <%= t.code %><br>
+	<% t.clients.each do |c| %>
+		<%= c.name %><br>
+			<% c.dishes.each do |d| %>
+				<%= d.title %>
+			<% end %>
+	<% end %>
+<% end %>

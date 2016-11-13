@@ -1,0 +1,8 @@
+<h1>Tables#welcome</h1>
+<p>Find me in app/views/tables/welcome.html.erb</p>
+
+<%=form_tag(tables_redirect_to_table_path) do %>
+	
+    <%=text_field_tag :code %>
+    <%=submit_tag 'Go to table'%>
+<%end%>

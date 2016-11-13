@@ -1,0 +1,9 @@
+<%= form_for @new do |f| %>
+	<%= f.label :name %><br>
+	<%= f.text_field :name %><br>
+	<br>
+	<%= f.label :password %><br>
+	<%= f.password_field :password, required: true %><br>
+	<br>
+	<%= f.submit %>
+<% end %>

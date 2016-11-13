@@ -1,0 +1,23 @@
+<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	<h2>Edit Dish</h2>
+<%= form_for([@category,@dish]) do |f| %>
+
+	<%= f.label :title %><br>
+	<%= f.text_field :title, required: true, class: "form-control"%>
+
+	<%= f.label :description %><br>
+	<%= f.text_field :description, required: true, class: "form-control"%>
+
+	<%= f.label :observation %><br>
+	<%= f.text_field :observation, class: "form-control"%>
+
+	<%= f.label :price %><br>
+	<%= f.number_field :price, required: true,:step => 'any', class: "form-control"%>
+
+	<%= f.label :category %><br>
+  	<%= f.collection_select :category_id, Category.all, :id, :name, include_blank: false, class: "form-control"%>
+	<br><br>
+	<%= f.submit "Save Dish", class: "btn btn-primary" %>
+	<br><br>
+<% end %>
+</div>

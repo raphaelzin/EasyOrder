@@ -1,0 +1,54 @@
+class TablesController < ApplicationController
+  def welcome
+
+  end
+
+  def redirect_to_table
+		@table = Table.find_by(:code => params[:code])
+		if @table.present?
+			session[:table_id] = @table.id
+			redirect_to tables_home_path(session[:table_id])
+		else
+			flash[:error] = "Incorrect code!"
+			redirect_to root_path
+		end
+	end
+
+  def home
+  	@new = Client.new
+  	# @table = Table.find(params[:id])
+  end
+
+  def edit
+    @table = Table.find(params[:id])
+  end
+
+  def create
+  	@table = Table.new(table_params)
+  	if @table.save
+  		#flash
+  		redirect_to admins_tables_path
+  	end
+  end
+
+  def update
+    @table = Table.find(params[:id])
+    if @table.update_attributes(table_params)
+      @table.save
+      redirect_to admins_tables_path
+    else
+      redirect_to :back
+    end
+  end
+
+  def destroy
+    @table = Table.find(params[:id])
+    @table.destroy
+    redirect_to :back
+  end
+
+  def table_params
+  	params.require(:table).permit(:code,:number,:waiter_id)
+  end 
+
+end

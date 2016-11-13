@@ -10,6 +10,69 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+ *= require_tree.
+ *= require bootstrap.min
  *= require_self
  */
+
+body
+{
+	background-color: #5780E9;
+	color: #000;
+}
+
+#container
+{
+	/*margin: 80px;*/
+	padding: 0px 80px 0px 80px;
+	background-color: #FFF;
+	/*height: 60vh;*/
+	border-radius: 16px;
+	/*text-align: center;*/
+/*
+	border-style: solid;
+	border-width: 2px;
+	border-color: #fff;
+*/
+}
+
+#toolbar
+{
+	background-color: white;
+	color:black;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+
+.cardImage
+{
+	width: 100px;
+	height: auto;
+
+	margin-top: 10px;
+	color: #5780E9;
+}
+
+.homeCard:hover
+{
+	cursor: hand;
+}
+
+button
+{
+	color: #fff;
+}
+
+.homeCard
+{
+	text-align: center;
+	font-size: 26px;
+
+	height: 170px;
+	width: 150px;
+	margin: 10px;
+	border-radius: 6px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #5780E9;
+}

@@ -1,0 +1,24 @@
+<h2>Welcome to the table <%= current_table.number %></h2>
+<% current_table.clients.each do |c| %>
+	<%= c.name %>(<%= c.dishes.size %>)<br>
+	<% c.dishes.each do |d| %>
+		<%= d.title %><br>
+	<% end %>
+<% end %>
+<br>
+<%= session[:client_id] %>
+<%= form_for([current_table,@new]) do |f| %>
+	<%= f.label :name %><br>
+	<%= f.text_field :name %><br>
+	<%= f.submit %>
+<% end %>
+
+<% Category.all.each do |c| %>
+	<h4><%= c.name %></h4><br>
+	<% c.dishes.each do |d| %>
+		<h5><%= d.title %></h5><br>
+		<%= link_to "Order", add_dish_table_client_path(current_table, current_client, dish_id: d.id), 
+						method: :post, data: { confirm: 'Confirm your order' }
+					%>
+	<% end %>
+<% end %>

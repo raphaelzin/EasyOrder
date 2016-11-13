@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Admin.destroy_all
+Waiter.destroy_all
+Table.destroy_all
+
+admin = Admin.create :name => "master", :password => "bolaazul"
+waiter = Waiter.create :name => "raphael", :password => "ana" 
+table = Table.create :code => "one", :number => 1

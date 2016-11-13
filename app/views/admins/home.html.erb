@@ -1,0 +1,47 @@
+<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+
+<h2>Admin Home</h2>
+<%= link_to admins_staff_path do %>
+	<div class="homeCard col-xs-4">
+		<%= image_tag "waiter", class: "cardImage"  %>
+		Staff
+	</div>
+<% end %>
+
+<%= link_to admins_categories_path do %>
+	<div class="homeCard col-xs-4">
+		<%= image_tag "categories_list", class: "cardImage" %>
+		Categories
+	</div>
+<% end %>
+
+<%= link_to admins_menu_path  do %>
+	<div class="homeCard col-xs-4">
+		<%= image_tag "menu", class: "cardImage" %>
+		Menu
+	</div>
+<% end %>
+
+<%= link_to admins_stats_path do %>
+	<div class="homeCard col-xs-4">
+		<%= image_tag "stats", class: "cardImage" %>
+		Stats
+	</div>
+<% end %>
+
+<%= link_to admins_tables_path do%>
+	<div class="homeCard col-xs-4">
+		<%= image_tag "tables", class: "cardImage" %>
+		Tables
+	</div>
+<% end %>
+
+<%= link_to admins_settings_path do %>
+	<div class="homeCard col-xs-4">
+		<%= image_tag "settings", class: "cardImage" %>
+		Settings
+	</div>
+<% end %>
+
+
+</div>

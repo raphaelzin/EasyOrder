@@ -1,0 +1,26 @@
+<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<br>
+<h2>Edit Waiter</h2>
+
+<%= form_for @waiter do |f| %>
+<%= f.label :name %><br>
+<%= f.text_field :name, required: true, class: "form-control"%>
+<br>
+
+<%= f.label :cpf %><br>
+<%= f.number_field :cpf, class: "form-control"%>
+
+<br>
+
+<%= f.label :phone %><br>
+<%= f.text_field :phone, class: "form-control"%>
+
+<br>
+<%= f.label :password, 'Enter new password' %>
+  <br>
+  <%= f.password_field :password, required: true, class: "form-control"%>
+<br>
+<%= f.submit "Save Waiter", class: "btn btn-primary" %>
+<br><br>
+<% end %>
+</div>

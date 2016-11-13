@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  waiter: one
+  client: one
+
+two:
+  waiter: two
+  client: two
