@@ -22,7 +22,19 @@ body
 	color: #000;
 }
 
-#tables
+.avatar
+{
+	height: 150px;
+	width: 150px;
+}
+
+.alert
+{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.tableCard
 {
 	vertical-align: top;
 	color:black;
@@ -35,6 +47,11 @@ body
 	padding:10px 10px 10px 10px;
 	margin:2px;
 	display: inline-block;
+}
+
+.calling
+{
+	background-color: #f00;
 }
 
 #container
@@ -162,6 +179,14 @@ tr
 	margin: 5px;
 }
 
+#message {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+}
+
+
 
 /*SMARTPHONE*/
 @media only screen and (max-width: 768px)
@@ -203,7 +228,7 @@ tr
 		display: block;
 		width: 50%;
 	}*/
-	#tables
+	.tableCard
 	{
 		width: 80%;
 		display: block;

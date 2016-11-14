@@ -1,24 +1,21 @@
-<%= Admin.count %>
+<% Admin.count %>
 <% Admin.all.each do |a| %>
-	<%= a.inspect %><br>
+	<% a.inspect %>
 <% end %>
 
+<div id="login">
 <h2>Admin Login</h2>
 
 <%= form_tag(admin_sessions_path, method: :create) do %>
 
-  Name:<br>
-  <%= text_field :session, :name, required: true %>
+  <h4>Name:</h4>
+  <%= text_field :session, :name, placeholder: "Enter your name", required: true, class: "form-control" %>
+  
+  <h4>Password:</h4>
+  <%= password_field :session, :password, placeholder: "Enter your password", required: true, class: "form-control"  %>
   <br>
-  password:<br>
-  <%= password_field :session, :password, required: true  %>
-
-  <br><br>
-  <button type='submit'>Login</button>
+  <%= submit_tag 'Login', class: "form-control btn-primary" %>
 <% end %>
 
-<br>
-<hr><br>
-<h2>Create Admin</h2>
-<%= render 'new_admin' %>
 
+</div>

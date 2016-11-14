@@ -10,36 +10,54 @@
   </head>
 
   <body>
+    <% if current_admin.present? %>
+      <div id="toolbar">
+        Logged as <%= current_admin.name %> (Administrator) - 
+        <%= link_to 'Admin home', admins_home_path %> / 
+         <%= link_to "Back to tables", waiters_tables_path %> / <%= link_to 'Sign out', admin_sign_out_path, method: :delete %>
+
+         <br>
+      </div>
+    <% end %>
+
+    <% if current_waiter.present? and not current_admin.present?%>
+      <div id="toolbar">
+        Logged as <%= current_waiter.name %> - 
+        <%= link_to 'Sign out', sign_out_path, method: :delete %>
+         / <%= link_to "Back to tables", waiters_tables_path %>
+         <br>
+      </div>
+    <%end%>
+
+    <%= yield %>
+
     <!-- Flash -->
-    <% if flash[:success] %>
-      <div class="alert-success">
-        <%= flash[:success]%><br>
+    <% if flash[:success] or flash[:error] %>
+      <div id="message">
+        <% if flash[:success] %>
+          <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> <%= flash[:success]%>
+          </div>
+        <%end%>
+        <% if flash[:error] %>
+          <div class="alert alert-error">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Error!</strong> <%= flash[:error]%><br>
+          </div>
+        <%end%>
       </div>
-    <%end%>
-    <% if flash[:error] %>
-      <div class="alert-error">
-        <%= flash[:error]%><br>
-      </div>
-    <%end%>
+    <% end %>
     <script>
       alertMessage();
     </script>
     <!-- Flash End -->
-
-    <% if current_waiter.present?%>
-    <div id="toolbar">
-      Logged as <%= current_waiter.name %> - 
-      <%= link_to 'Sign out', sign_out_path, method: :delete %>
-       / <%= link_to "Back to tables", waiters_tables_path %>
-       <br>
-    </div>
-    <%end%>
     
-    <% current_admin.inspect%>
-  	<% current_client.inspect%>
-    <% current_waiter.inspect%>
-    <% current_table.inspect%>
+    <% current_admin.inspect %>
+  	<% current_client.inspect %>
+    <% current_waiter.inspect %>
+    <% current_table.inspect %>
 
-  		<%= yield %>
+  		
   </body>
 </html>

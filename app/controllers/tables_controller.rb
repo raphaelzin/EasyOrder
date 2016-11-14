@@ -7,6 +7,7 @@ class TablesController < ApplicationController
 		@table = Table.find_by(:code => params[:code])
 		if @table.present?
 			session[:table_id] = @table.id
+      flash[:success] = "Welcome to table #{@table.number}"
 			redirect_to tables_home_path(session[:table_id])
 		else
 			flash[:error] = "Incorrect code!"
@@ -14,11 +15,13 @@ class TablesController < ApplicationController
 		end
 	end
 
+  
+
   def home
   	@new = Client.new
-
-    session[:table_id] = params[:id]
-  	# @table = Table.find(params[:id])
+    if not current_table.present?
+      session[:table_id] = params[:id]
+    end
   end
 
   def edit
@@ -41,6 +44,13 @@ class TablesController < ApplicationController
     else
       redirect_to :back
     end
+  end
+
+  def toggle_request
+    @table = Table.find(params[:table_id])
+    @table.requested = !@table.requested
+    @table.save
+    redirect_to :back
   end
 
   def destroy

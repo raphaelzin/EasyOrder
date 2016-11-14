@@ -1,7 +1,6 @@
-
 <% @tables.each do |t| %>
 <% if (true) %>
-<div id="tables" class="table<%=t.number%>">
+<div class="tableCard" id="table-<%=t.number%>">
 	<h5>
 	- (<%=t.clients.count%>)
 	<%= link_to "Table #{t.number}", tables_home_path(id: t) %> 
@@ -18,7 +17,7 @@
 	<br>
 	Total: <%= number_with_precision(t.bill_value, :precision => 2) %>
 	<br>
-
+	<%= link_to_if(t.requested, "toggle requested", toggle_request_table_path(t,table_id: t, user: 1), method: :post){}%>
 	<br>
 	<%else%>
 		Empty Table
@@ -27,3 +26,27 @@
 </div> <!-- Tables --> 
 <%end%>
 <%end%>
+
+
+
+
+<script type="text/javascript">
+
+
+// window.setTimeout(updateTables, 500);
+setInterval( updateTables , 5000);
+
+function updateTables() {
+  $.getJSON('/waiters/tables_calling', function (data)
+  {
+    $('.tableCard').removeClass('calling');
+
+    for (var i = 0; i < data.length; i++)
+    {
+    	console.log(data[i]);
+    	$('#table-' + data[i]).addClass('calling')
+    }
+  });
+}
+
+</script>

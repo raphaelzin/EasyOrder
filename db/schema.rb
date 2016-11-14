@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110224332) do
+ActiveRecord::Schema.define(version: 20161114200242) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -30,8 +30,12 @@ ActiveRecord::Schema.define(version: 20161110224332) do
     t.string   "name"
     t.integer  "fbid"
     t.integer  "table_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["table_id"], name: "index_clients_on_table_id"
   end
 
@@ -65,12 +69,18 @@ ActiveRecord::Schema.define(version: 20161110224332) do
     t.index ["waiter_id"], name: "index_orders_on_waiter_id"
   end
 
+  create_table "pictures", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tables", force: :cascade do |t|
     t.string   "code"
     t.integer  "number"
     t.integer  "waiter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "requested"
     t.index ["waiter_id"], name: "index_tables_on_waiter_id"
   end
 

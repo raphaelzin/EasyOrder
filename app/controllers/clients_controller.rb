@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
 	def show
 	    @client = Client.find(params[:id])
 
-	    if current_waiter.present?
+	    if current_waiter.present? or current_admin.present?
 	      session[:client_id] = @client.id
 	      session[:table_id] = @client.table.id
         redirect_to tables_home_path(@client.table.id)
@@ -48,7 +48,7 @@ class ClientsController < ApplicationController
   end
 
   def client_params
-  	params.require(:client).permit(:name,:table_id)
+  	params.require(:client).permit(:name,:table_id, :avatar)
   end
 
   def lookup_table

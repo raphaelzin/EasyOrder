@@ -11,7 +11,7 @@ class AdminSessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to waiters_login_path, notice: 'Bye!'
+    redirect_to admins_login_path, notice: 'Bye!'
   end
 
   private

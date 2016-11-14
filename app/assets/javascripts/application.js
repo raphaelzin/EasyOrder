@@ -23,3 +23,5 @@ function alertMessage()
   	$( ".alert-error" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
   	$( ".alert-success" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
 }
+
+
