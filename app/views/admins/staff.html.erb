@@ -5,7 +5,7 @@
 <!-- <hr> -->
 
 <!-- <div class="table-responsive"> -->
-<table class="table table-striped">
+<table class="table table-bordered">
 	<% @waiters.each do |w| %>
 		<tr> 
 			<td>
@@ -21,7 +21,7 @@
 				<div class="text-right col-xl-6 col-md-6">
 
 				<%= link_to "Delete", waiter_path(w), :method => :delete, data: {confirm: 'Are you sure you want to delete this Waiter?'}, class: "btn btn-danger pull-right"%>
-				<br><br>
+
 
 				<%= link_to "Edit", edit_waiter_path(w), class: "btn btn-primary pull-right"%>
 				</div>

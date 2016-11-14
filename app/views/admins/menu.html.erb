@@ -1,23 +1,28 @@
 <div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <h2>View and edit the menu</h2>
 <!-- <hr> -->
-<table class="table table-striped">
+
+<!-- <ul class="group-list"> -->
+<table class="table table-bordered col-xs-12">
 	<% @dishes.each do |d| %>
+		<!-- <li class="list-group-item"> -->
 		<tr>
 			<td>
-				<div class="text-left col-xl-6 col-md-6">
+				<div class="text-left col-xl-8 col-md-8">
 					<%= d.title %> ($ <%= d.price %>)<br>
 					<%= d.description %><br>
 				</div>
-				<div class="text-left col-xl-6 col-md-6">
+				<div class="text-left col-xl-4 col-md-4">
 				<%= link_to "Delete", category_dish_path(d.category,d), :method => :delete, data: {confirm: 'Are you sure you want to delete this Dish?'}, class: "btn btn-danger pull-right"%>
-				<br><br>
+				  
 
 				<%= link_to "Edit", edit_category_dish_path(d.category,d), class: "btn btn-primary pull-right"%>
 				</div>
 			</td>
+			<!-- </li> -->
 		</tr>
 	<% end %>
+<!-- </ul> -->
 </table>
 
 <!-- <hr> -->

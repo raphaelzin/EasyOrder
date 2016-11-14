@@ -1,24 +1,68 @@
-<h2>Welcome to the table <%= current_table.number %></h2>
-<% current_table.clients.each do |c| %>
-	<%= c.name %>(<%= c.dishes.size %>)<br>
-	<% c.dishes.each do |d| %>
-		<%= d.title %><br>
-	<% end %>
-<% end %>
-<br>
-<%= session[:client_id] %>
-<%= form_for([current_table,@new]) do |f| %>
-	<%= f.label :name %><br>
-	<%= f.text_field :name %><br>
-	<%= f.submit %>
-<% end %>
+<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-<% Category.all.each do |c| %>
-	<h4><%= c.name %></h4><br>
-	<% c.dishes.each do |d| %>
-		<h5><%= d.title %></h5><br>
-		<%= link_to "Order", add_dish_table_client_path(current_table, current_client, dish_id: d.id), 
-						method: :post, data: { confirm: 'Confirm your order' }
-					%>
+<!-- <h2>Welcome to the table <%= current_table.number %></h2> -->
+<!-- Profile -->
+
+<div class="col-lg-4 col-md-4" id="profile">
+	<% if current_client.present? %>
+	<h3> <%= current_client.name %> </h3>
+	<h4>You've ordered:</h4>
+	<div id="orders">
+		<% current_client.dishes.each do |d| %>
+			<h5><%= d.title %></h5>
+		<% end %>
+	</div>
+	<h4>Total: $<%= current_client.bill_value %></h4>
+	<% else %>
+		<%= form_for([current_table,@new]) do |f| %>
+			<%= f.label :name %><br>
+			<%= f.text_field :name, class: "form-control" %><br>
+			<%= f.submit "Login", class: "btn btn-primary" %>
+		<% end %>
 	<% end %>
-<% end %>
+</div>
+<!-- Menu -->
+<div class="col-lg-8 col-md-8" id="menu">
+	<h2>Menu</h2>
+	<div id="category">
+
+		
+		<% Category.all.each do |c| %>
+			<h4><%= c.name %></h4>
+			<table class="table table-bordered">
+			<ul class="group-list">
+
+			<!-- <div class="dishes"> -->
+
+			<% c.dishes.each do |d| %>
+			<tr>
+			<td>
+			<!-- <li class="list-group-item"> -->
+				<div class="text-left col-xl-10 col-md-10">
+					<%= d.title %> ($ <%= d.price %>)<br>
+					<%= d.description %><br>
+				</div>
+				 <div class="text-left col-xl-2 col-md-2">
+				<%= link_to "Order", add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: { confirm: 'Confirm your order' }, class: "btn btn-success pull-right" %>
+				</div>
+			</li>
+			</td>
+			</tr>
+			<% end %>
+
+			<!-- </div> -->
+
+			<!-- </ul> -->
+			</table>
+		<% end %>
+
+		
+	</div>
+</div>
+
+
+
+<br>
+
+
+</div>

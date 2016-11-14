@@ -3,13 +3,29 @@
   <head>
     <title>EasyOrder</title>
     <%= csrf_meta_tags %>
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
-    
+    <!-- Flash -->
+    <% if flash[:success] %>
+      <div class="alert-success">
+        <%= flash[:success]%><br>
+      </div>
+    <%end%>
+    <% if flash[:error] %>
+      <div class="alert-error">
+        <%= flash[:error]%><br>
+      </div>
+    <%end%>
+    <script>
+      alertMessage();
+    </script>
+    <!-- Flash End -->
+
     <% if current_waiter.present?%>
     <div id="toolbar">
       Logged as <%= current_waiter.name %> - 
@@ -19,10 +35,10 @@
     </div>
     <%end%>
     
-    <!-- <%current_admin.inspect%><br> -->
-  	<!-- <%current_client.inspect%><br> -->
-    <!-- <%current_waiter.inspect%><br> -->
-    <!-- <%current_table.inspect%><br> -->
+    <% current_admin.inspect%>
+  	<% current_client.inspect%>
+    <% current_waiter.inspect%>
+    <% current_table.inspect%>
 
   		<%= yield %>
   </body>

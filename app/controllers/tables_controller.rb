@@ -16,6 +16,8 @@ class TablesController < ApplicationController
 
   def home
   	@new = Client.new
+
+    session[:table_id] = params[:id]
   	# @table = Table.find(params[:id])
   end
 
@@ -42,7 +44,7 @@ class TablesController < ApplicationController
   end
 
   def destroy
-    @table = Table.find(params[:id])
+    @table = Table.find(table_params[:id])
     @table.destroy
     redirect_to :back
   end

@@ -1,9 +1,29 @@
+
 <% @tables.each do |t| %>
-	<%= t.number %> - <%= t.code %><br>
+<% if (true) %>
+<div id="tables" class="table<%=t.number%>">
+	<h5>
+	- (<%=t.clients.count%>)
+	<%= link_to "Table #{t.number}", tables_home_path(id: t) %> 
+	(<%= t.code %>) -
+	</h5>
+	<br>
+	<div id="table<%=t.number%>-content" class="tables-content"> 
 	<% t.clients.each do |c| %>
-		<%= c.name %><br>
-			<% c.dishes.each do |d| %>
-				<%= d.title %>
-			<% end %>
+		<%= link_to c.name, table_client_path(t,c) %> 
+		($<%= number_with_precision(c.bill_value, :precision => 2) %>)
+		<br>
 	<% end %>
-<% end %>
+	<% if t.clients.count != 0 %>
+	<br>
+	Total: <%= number_with_precision(t.bill_value, :precision => 2) %>
+	<br>
+
+	<br>
+	<%else%>
+		Empty Table
+	<%end%>
+</div> <!-- TableX-content -->
+</div> <!-- Tables --> 
+<%end%>
+<%end%>

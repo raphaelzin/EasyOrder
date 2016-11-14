@@ -5,7 +5,7 @@ def create
 
     if user && user.authenticate(session_params[:password])
       session[:waiter_id] = user.id
-      redirect_to root_path, notice: 'Hi, friend!'
+      redirect_to waiters_tables_path, notice: 'Hi, friend!'
     else
       redirect_to root_path, notice: 'No way!'
     end

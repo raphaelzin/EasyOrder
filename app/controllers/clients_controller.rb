@@ -8,6 +8,7 @@ class ClientsController < ApplicationController
 	    if current_waiter.present?
 	      session[:client_id] = @client.id
 	      session[:table_id] = @client.table.id
+        redirect_to tables_home_path(@client.table.id)
 	    end
 			
 	    if @client.id != session[:client_id]  && !current_waiter.present?

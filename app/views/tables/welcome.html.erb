@@ -1,8 +1,14 @@
-<h1>Tables#welcome</h1>
-<p>Find me in app/views/tables/welcome.html.erb</p>
-
-<%=form_tag(tables_redirect_to_table_path) do %>
+<div id="welcome">
 	
-    <%=text_field_tag :code %>
-    <%=submit_tag 'Go to table'%>
-<%end%>
+	
+
+	<%=form_tag(tables_redirect_to_table_path) do %>
+		<h3>Table</h3>
+		Enter Table Code
+	    <%= text_field_tag :code,"", maxlength: 15, class: "form-control", placeholder: "Ask the waiter for your code" %><br>
+	    <%= submit_tag 'Go to table', class: "form-control btn-primary" %>
+	<%end%>
+
+	<br>
+
+</div>

@@ -18,13 +18,30 @@
 body
 {
 	background-color: #5780E9;
+	font-family: 'Roboto', sans-serif;
 	color: #000;
+}
+
+#tables
+{
+	vertical-align: top;
+	color:black;
+	width:250px;
+	height:auto;
+	margin-top:0;
+	background-color:#fff;
+	border-radius:4px;
+	border: 3px solid #DDD;
+	padding:10px 10px 10px 10px;
+	margin:2px;
+	display: inline-block;
 }
 
 #container
 {
 	/*margin: 80px;*/
-	padding: 0px 80px 0px 80px;
+	margin-top: 15px;
+	padding: 0px 40px 0px 40px;
 	background-color: #FFF;
 	/*height: 60vh;*/
 	border-radius: 16px;
@@ -75,4 +92,131 @@ button
 	border-style: solid;
 	border-width: 2px;
 	border-color: #5780E9;
+}
+
+#orders
+{
+	padding-left: 20px;
+	text-align: left;
+}
+
+#menu
+{
+	/*border-style: solid;*/
+	border-left: 2px solid #5780E9;
+}
+
+#profile
+{
+	margin-left: -40px;
+	text-align: center;
+}
+
+#dishes
+{
+	padding-left: 20px;
+}
+
+#category
+{
+	padding-left: 20px;
+}
+
+.list-group-item
+{
+	height: 90px;
+}
+
+
+#welcome
+{
+	border-radius: 16px;
+	margin:15% auto 0% auto;
+	display: block;
+	text-align: center;
+	background-color: #fff;
+	width: 240px;
+	height: 300px;
+	padding: 10px;
+}
+
+#login
+{
+	border-radius: 16px;
+	margin:15% auto 0% auto;
+	display: block;
+	text-align: left;
+	background-color: #fff;
+	width: 240px;
+	height: 300px;
+	padding: 10px;
+}
+
+tr
+{
+	border-radius: 5px;
+}
+
+.btn
+{
+	margin: 5px;
+}
+
+
+/*SMARTPHONE*/
+@media only screen and (max-width: 768px)
+{
+	h1{	}
+	#container
+	{
+		padding: 10px;
+		margin: 5px;
+	}
+/*	#profile
+	{
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		width: 50%;
+	}*/
+	#container
+	{
+		padding: 10px;
+	}
+
+}
+
+
+@media only screen and (max-width: 480px)
+{
+	h1{}
+	#container
+	{
+		padding: 10px;
+		margin: 5px;
+	}
+
+/*	#profile
+	{
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		width: 50%;
+	}*/
+	#tables
+	{
+		width: 80%;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	h3
+	{
+		font-size: 20px;
+	}
+	h5
+	{
+		font-size: 18px;
+	}
 }

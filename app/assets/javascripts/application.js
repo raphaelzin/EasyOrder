@@ -15,3 +15,11 @@
 //= require turbolinks
 //= require bootstrap.min
 //= require_tree .
+
+function alertMessage()
+{
+	$( ".alert-error" ).hide();
+	$( ".alert-success" ).hide();
+  	$( ".alert-error" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
+  	$( ".alert-success" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
+}
