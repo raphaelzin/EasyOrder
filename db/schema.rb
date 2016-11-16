@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114200242) do
+ActiveRecord::Schema.define(version: 20161116125343) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 20161114200242) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "provider"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.string   "uid"
     t.index ["table_id"], name: "index_clients_on_table_id"
   end
 

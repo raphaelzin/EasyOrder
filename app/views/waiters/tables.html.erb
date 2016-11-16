@@ -1,6 +1,6 @@
 <% @tables.each do |t| %>
 <% if (true) %>
-<div class="tableCard" id="table-<%=t.number%>">
+<div class="tableCard" id="table-<%=t.id%>">
 	<h5>
 	- (<%=t.clients.count%>)
 	<%= link_to "Table #{t.number}", tables_home_path(id: t) %> 

@@ -48,7 +48,7 @@ class ClientsController < ApplicationController
   end
 
   def client_params
-  	params.require(:client).permit(:name,:table_id, :avatar)
+  	params.require(:client).permit(:name,:table_id, :avatar, :uid, :fbid)
   end
 
   def lookup_table

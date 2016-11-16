@@ -2,7 +2,9 @@
 
 <div class="col-lg-4 col-md-4" id="profile">
 	<% if current_client.present? %><br>
-	<%= image_tag current_client.avatar.url(:medium), class: "avatar img-circle" %>
+	<% image_tag current_client.avatar.url(:medium), class: "avatar img-circle" %>
+
+	<img src="http://graph.facebook.com/<%= current_client.uid %>/picture?type=large" class="img-circle" class="avatar img-circle"><br>
 	<h3> <%= current_client.name %> </h3>
 	<!-- Request Waiter -->
 	<% if current_client.table.requested %>
@@ -17,8 +19,9 @@
 		<% current_client.dishes.each do |d| %>
 			<h5><%= d.title %></h5>
 		<% end %>
-	</div>
+	
 	<h4>Total: $<%= number_with_precision(current_client.bill_value, :precision => 2) %></h4>
+	</div>
 	<% else %>
 		<%= form_for([current_table,@new]) do |f| %>
 			<%= f.file_field :avatar %>
@@ -32,8 +35,6 @@
 <div class="col-lg-8 col-md-8" id="menu">
 	<h2>Menu</h2>
 	<div id="category">
-
-		
 		<% Category.all.each do |c| %>
 			<h4><%= c.name %></h4>
 			<table class="table table-bordered">
@@ -56,20 +57,11 @@
 			</td>
 			</tr>
 			<% end %>
-
-			<!-- </div> -->
-
-			<!-- </ul> -->
 			</table>
 		<% end %>
 
 		
 	</div>
 </div>
-
-
-
 <br>
-
-
 </div>

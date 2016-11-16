@@ -1,11 +1,15 @@
 class TablesController < ApplicationController
   def welcome
-
+    # reset_session
   end
 
   def redirect_to_table
 		@table = Table.find_by(:code => params[:code])
 		if @table.present?
+      if current_client.present?
+        current_client.table = @table
+      end
+      current_client.table.id = @table.id
 			session[:table_id] = @table.id
       flash[:success] = "Welcome to table #{@table.number}"
 			redirect_to tables_home_path(session[:table_id])

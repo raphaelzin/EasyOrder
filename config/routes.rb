@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   	end
   end
 
+
+  resources :client_sessions
   resources :admins
   resources :waiters
 	resources :sessions
@@ -46,6 +48,17 @@ Rails.application.routes.draw do
   resources :categories do
   	resources :dishes
   end
+
+  EasyOrder::Application.routes.draw do
+    get 'auth/:provider/callback', to: 'client_sessions#create'
+    get 'auth/failure', to: redirect('/')
+    get 'signout', to: 'client_sessions#destroy', as: 'signout'
+ 
+    resources :client_sessions, only: [:create, :destroy]
+    # resource :home, only: [:show]
+ 
+    root to: "tables#welcome"
+end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
