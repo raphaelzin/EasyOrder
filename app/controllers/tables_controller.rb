@@ -5,14 +5,16 @@ class TablesController < ApplicationController
 
   def redirect_to_table
 		@table = Table.find_by(:code => params[:code])
+
 		if @table.present?
       if current_client.present?
-        current_client.table = @table
+        @client = current_client
+        @client.table = @table
+        @client.save
       end
-      current_client.table.id = @table.id
 			session[:table_id] = @table.id
       flash[:success] = "Welcome to table #{@table.number}"
-			redirect_to tables_home_path(session[:table_id])
+			redirect_to tables_home_path
 		else
 			flash[:error] = "Incorrect code!"
 			redirect_to root_path
@@ -25,6 +27,12 @@ class TablesController < ApplicationController
   	@new = Client.new
     if not current_table.present?
       session[:table_id] = params[:id]
+    end
+
+    if current_client.present?
+      if current_table != current_client.table
+        redirect_to tables_home_path
+      end
     end
   end
 

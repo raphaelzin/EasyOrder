@@ -1,11 +1,12 @@
-<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
 
 <div class="col-lg-4 col-md-4" id="profile">
+
 	<% if current_client.present? %><br>
 	<% image_tag current_client.avatar.url(:medium), class: "avatar img-circle" %>
+	<img src="<%= current_client.avatar_url %>" class="img-circle avatar"><br>
 
-	<img src="http://graph.facebook.com/<%= current_client.uid %>/picture?type=large" class="img-circle" class="avatar img-circle"><br>
-	<h3> <%= current_client.name %> </h3>
+	<h3> <%= current_client.first_name %> <%= current_client.last_name %> </h3>
 	<!-- Request Waiter -->
 	<% if current_client.table.requested %>
 		<h5>Waiter has been called</h5>
@@ -13,23 +14,43 @@
 	
 	<h5><%=link_to "Call waiter", toggle_request_table_path(current_client.table,table_id: current_client.table), user: 2, method: :post %></h5>
 	<%end%>
-	<!-- Request Waiter -->
-	<h4>You've ordered:</h4>
-	<div id="orders">
-		<% current_client.dishes.each do |d| %>
-			<h5><%= d.title %></h5>
-		<% end %>
+	<!-- Request Waiter End -->
+	<!-- Orders -->
+	<% if current_client.dishes.count > 0 %>
+		<h4>You've ordered:</h4>
+		<div id="orders">
+			<% current_client.dishes.each do |d| %>
+				<h5><%= d.title %></h5>
+			<% end %>
+		</div>
+		<h4>Total: $<%= number_with_precision(current_client.bill_value, :precision => 2) %></h4>
+	<% else %>
+		<h4>You haven't ordered anything</h4>
+		<h4>Aren't you hungry?</h4>
+	<% end %>
 	
-	<h4>Total: $<%= number_with_precision(current_client.bill_value, :precision => 2) %></h4>
-	</div>
+	<!-- Orders End -->
 	<% else %>
 		<%= form_for([current_table,@new]) do |f| %>
-			<%= f.file_field :avatar %>
 			<%= f.label :name %><br>
 			<%= f.text_field :name, class: "form-control" %><br>
 			<%= f.submit "Login", class: "btn btn-primary" %>
 		<% end %>
 	<% end %>
+
+	<hr>
+	<div class="col-xs-12 col-md-12 people-on-table">
+		Who's on the table<br>
+		<% current_table.clients.each do |c| %>
+			<div class="col-xs-4">
+				<img src="<%= c.avatar_url %>" class="img-circle thumb"><br>
+				<%= c.first_name %>
+			</div>
+		<% end %>
+	</div>
+	<br>
+	<hr>
+
 </div>
 <!-- Menu -->
 <div class="col-lg-8 col-md-8" id="menu">

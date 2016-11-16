@@ -22,6 +22,7 @@ body
 	background-color: #5780E9;
 	font-family: 'Roboto', sans-serif;
 	color: #000;
+	overflow: hidden;
 }
 
 #restaurant-logo
@@ -35,6 +36,18 @@ body
 {
 	height: 150px;
 	width: 150px;
+}
+
+.thumb
+{
+	height: 50px;
+	width: 50px;
+}
+
+.people-on-table
+{
+	text-align: center;
+	padding: 0;
 }
 
 .alert
@@ -58,25 +71,26 @@ body
 	display: inline-block;
 }
 
+
+
 .calling
 {
 	background-color: #f00;
 }
 
+.tableHome
+{
+	height: 90vh;
+}
+
 #container
 {
-	/*margin: 80px;*/
 	margin-top: 15px;
+	margin-bottom: 15px;
+	overflow: hidden;
 	padding: 0px 40px 0px 40px;
 	background-color: #FFF;
-	/*height: 60vh;*/
 	border-radius: 16px;
-	/*text-align: center;*/
-/*
-	border-style: solid;
-	border-width: 2px;
-	border-color: #fff;
-*/
 }
 
 #toolbar
@@ -131,11 +145,16 @@ button
 #menu
 {
 	/*border-style: solid;*/
+	height: 100vh;
+	overflow-y: scroll;
+
 	border-left: 2px solid #5780E9;
 }
 
 #profile
 {
+	height: 90vh;
+	overflow-y: scroll;
 	margin-left: -40px;
 	text-align: center;
 }
@@ -208,6 +227,24 @@ tr
 		margin-left: 40px;
 		margin-right: 40px;
 	}
+
+	#profile
+	{
+		height: auto;
+		overflow-y: scroll;
+	}
+
+	#menu
+	{
+		height: auto;
+		overflow-y: scroll;
+	}
+
+	.tableHome
+	{
+		height: auto;
+	}
+
 		#orders
 	{
 		width: 50%;
@@ -232,6 +269,11 @@ tr
 		padding: 10px;
 		margin: 5px;
 	}
+
+	.tableHome
+	{
+		height: auto;
+	}
 /*	#profile
 	{
 		margin-left: auto;
@@ -239,12 +281,25 @@ tr
 		display: block;
 		width: 50%;
 	}*/
+
+	#profile
+	{
+		height: auto;
+		overflow-y: scroll;
+	}
+
 	#container
 	{
 		padding: 10px;
 	}
 
-		#orders
+	#menu
+	{
+		height: auto;
+		overflow-y: scroll;
+	}
+
+	#orders
 	{
 		width: 70%;
 		margin-right: auto;
@@ -271,6 +326,11 @@ tr
 		margin: 5px;
 	}
 
+	.tableHome
+	{
+		height: auto;
+	}
+
 /*	#profile
 	{
 		margin-left: auto;
@@ -293,9 +353,19 @@ tr
 		margin-left: auto;
 	}
 
+	#menu
+	{
+		height: auto;
+		overflow-y: scroll;
+	}
+
+
+
 	#profile
 	{
 		margin-left: 0px;
+		height: auto;
+		overflow-y: scroll;
 	}
 
 	h3

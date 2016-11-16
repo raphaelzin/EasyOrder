@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_table, :current_client, :current_waiter, :current_admin
 
   def current_table
-  	if session.key?(:table_id)
+  	if session.key?(:table_id) and session[:table_id] != nil
       Table.find(session[:table_id])
     else
       nil
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_client
-	if session.key?(:client_id)
+	if session.key?(:client_id) and session[:client_id] != nil
       Client.find(session[:client_id])
     else
       nil
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_waiter
-  	if session.key?(:waiter_id)
+  	if session.key?(:waiter_id) and session[:waiter_id] != nil
       Waiter.find(session[:waiter_id])
     else
       nil
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_admin
-  	if session.key?(:admin_id)
+  	if session.key?(:admin_id) and session[:admin_id] != nil
       Admin.find(session[:admin_id])
     else
       nil

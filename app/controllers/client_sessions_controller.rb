@@ -9,5 +9,4 @@ class ClientSessionsController < ApplicationController
     session[:client_id] = nil
     redirect_to root_path
   end
-
 end
