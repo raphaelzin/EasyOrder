@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
 	around_filter :catch_not_found
-  	before_action :lookup_table
+  before_action :lookup_table
 
 	def show
 	    @client = Client.find(params[:id])
@@ -30,6 +30,15 @@ class ClientsController < ApplicationController
     redirect_to tables_home_path(@client.table)
   end
 
+  def remove_dish
+    @client = Client.find(params[:client_id])
+    @dish = Dish.find(params[:dish_id])
+
+    @client.dishes.delete(@dish)
+    @client.save
+    redirect_to :back
+  end
+
   def create
     @client = @table.clients.new(client_params)
     if @client.save
@@ -45,6 +54,14 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
     @client.destroy
     redirect_to waiters_tables_path
+  end
+
+  def toggle_done
+    @client = Client.find(params[:id])
+    @client.checking_out = false
+    @client.done = !@client.done
+    @client.save
+    redirect_to :back
   end
 
   def client_params

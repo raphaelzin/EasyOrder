@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116125343) do
+ActiveRecord::Schema.define(version: 20161117174324) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -40,6 +40,9 @@ ActiveRecord::Schema.define(version: 20161116125343) do
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.string   "uid"
+    t.boolean  "checking_out"
+    t.boolean  "done"
+    t.string   "payment_method"
     t.index ["table_id"], name: "index_clients_on_table_id"
   end
 
@@ -54,8 +57,12 @@ ActiveRecord::Schema.define(version: 20161116125343) do
     t.string   "description"
     t.string   "observation"
     t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
     t.index ["category_id"], name: "index_dishes_on_category_id"
   end
 

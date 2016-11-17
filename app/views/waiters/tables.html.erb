@@ -1,24 +1,37 @@
 <% @tables.each do |t| %>
-<% if (true) %>
+<% if (true) and t.number != 0 %>
 <div class="tableCard" id="table-<%=t.id%>">
 	<h5>
 	- (<%=t.clients.count%>)
 	<%= link_to "Table #{t.number}", tables_home_path(id: t) %> 
 	(<%= t.code %>) -
 	</h5>
-	<br>
+	
 	<div id="table<%=t.number%>-content" class="tables-content"> 
 	<% t.clients.each do |c| %>
-		<%= link_to c.name, table_client_path(t,c) %> 
-		($<%= number_with_precision(c.bill_value, :precision => 2) %>)
-		<br>
+		<%= link_to c.name, table_client_path(t,c) %> <br>
+		($<%= number_with_precision(c.bill_value, :precision => 2) %>)<br>
+
+		<% link_to "Delete client", table_client_path(t,c), method: :delete %>
+
+		<div class="tableOrders">
+			<% c.dishes.each do |d| %>
+				<%= d.title %>
+				
+					<% d.price %>
+					<%= link_to "Delete", remove_dish_table_client_path(t,client_id: c,dish_id: d, id: d.id), method: :post, data: {confirm: 'Are you sure you want to delete this Dish?'}, class: "pull-right"%> 
+				
+				<br>
+			<% end %>
+		</div>
+		<hr>
 	<% end %>
 	<% if t.clients.count != 0 %>
 	<br>
 	Total: <%= number_with_precision(t.bill_value, :precision => 2) %>
 	<br>
 	<%= link_to_if(t.requested, "toggle requested", toggle_request_table_path(t,table_id: t, user: 1), method: :post){}%>
-	<br>
+
 	<%else%>
 		Empty Table
 	<%end%>

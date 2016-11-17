@@ -15,6 +15,7 @@
 	<h5><%=link_to "Call waiter", toggle_request_table_path(current_client.table,table_id: current_client.table), user: 2, method: :post %></h5>
 	<%end%>
 	<!-- Request Waiter End -->
+	
 	<!-- Orders -->
 	<% if current_client.dishes.count > 0 %>
 		<h4>You've ordered:</h4>
@@ -28,12 +29,12 @@
 		<h4>You haven't ordered anything</h4>
 		<h4>Aren't you hungry?</h4>
 	<% end %>
-	
 	<!-- Orders End -->
+
 	<% else %>
 		<%= form_for([current_table,@new]) do |f| %>
 			<%= f.label :name %><br>
-			<%= f.text_field :name, class: "form-control" %><br>
+			<%= f.text_field :name, class: "form-control", required: true %><br>
 			<%= f.submit "Login", class: "btn btn-primary" %>
 		<% end %>
 	<% end %>
@@ -50,7 +51,6 @@
 	</div>
 	<br>
 	<hr>
-
 </div>
 <!-- Menu -->
 <div class="col-lg-8 col-md-8" id="menu">
@@ -61,20 +61,24 @@
 			<table class="table table-bordered">
 			<ul class="group-list">
 
-			<!-- <div class="dishes"> -->
-
 			<% c.dishes.each do |d| %>
 			<tr>
 			<td>
-			<!-- <li class="list-group-item"> -->
-				<div class="text-left col-xl-10 col-md-10">
+			<!-- Dish -->
+
+				<div class="col-xl-1 col-md-1 dishPictureHome">
+					<%= image_tag d.picture.url, class: "dishPicture img-circle" %>
+				</div>
+
+				<div class="text-left col-xl-9 col-md-9">
 					<%= d.title %> ($ <%= d.price %>)<br>
 					<%= d.description %><br>
 				</div>
-				 <div class="text-left col-xl-2 col-md-2">
-				<%= link_to "Order", add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: { confirm: 'Confirm your order' }, class: "btn btn-success pull-right" %>
+				 <div class="text-left col-xl-2 col-md-2" style="padding-right: 0px;">
+				<%= link_to "Order", add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: { confirm: 'Confirm your order' }, class: "btn btn-success pull-right order-btn" %>
 				</div>
-			</li>
+			<!-- Dish END -->
+
 			</td>
 			</tr>
 			<% end %>

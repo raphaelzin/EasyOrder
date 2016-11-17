@@ -20,9 +20,29 @@
 body
 {
 	background-color: #5780E9;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Varela Round', sans-serif;
 	color: #000;
-	overflow: hidden;
+	/*overflow: hidden;*/
+}
+
+.dishPicture
+{
+	height: 50px;
+	width: 50px;
+	padding: 0px;
+}
+
+.dishPictureHome
+{
+	padding: 0px;
+	margin-right: 0px;
+}
+
+
+hr
+{
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 
 #restaurant-logo
@@ -142,10 +162,19 @@ button
 	text-align: left;
 }
 
+.tableOrders
+{
+	border-left: 2px solid #5780E9;
+	padding-left: 10px;
+	text-align: left;
+}
+
 #menu
 {
 	/*border-style: solid;*/
-	height: 100vh;
+	/*height: 100vh;*/
+	height: 100%;
+
 	overflow-y: scroll;
 
 	border-left: 2px solid #5780E9;
@@ -228,6 +257,12 @@ tr
 		margin-right: 40px;
 	}
 
+	.dishPictureHome
+	{
+		padding-left: 15px;
+		margin-right: 0px;
+	}
+
 	#profile
 	{
 		height: auto;
@@ -258,6 +293,16 @@ tr
 	h5
 	{
 		font-size: 16px;
+	}
+	td
+	{
+		padding: 4px;
+	}
+
+	.dishPicture
+	{
+		height: 100px;
+		width: 100px;
 	}
 }
 
@@ -314,16 +359,61 @@ tr
 		font-size: 18px;
 	}
 
+	.tableCard
+	{
+		width: 95%;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.dishPictureHome
+	{
+		padding-left: 15px;
+		margin-right: 0px;
+	}
+
+	.dishPicture
+	{
+		height: 100px;
+		width: 100px;
+	}
 }
 
 
 @media only screen and (max-width: 480px)
 {
 	h1{}
+
+	.dishPicture
+	{
+		height: 100px;
+		width: 100px;
+	}
+
 	#container
 	{
 		padding: 10px;
 		margin: 5px;
+	}
+
+	.dishPictureHome
+	{
+		padding-left: 15px;
+		margin-right: 0px;
+	}
+
+	.order-btn
+	{
+		height: 90%;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.menuData
+	{
+		text-align: center;
 	}
 
 	.tableHome
@@ -340,7 +430,7 @@ tr
 	}*/
 	.tableCard
 	{
-		width: 80%;
+		width: 95%;
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
@@ -358,8 +448,6 @@ tr
 		height: auto;
 		overflow-y: scroll;
 	}
-
-
 
 	#profile
 	{
