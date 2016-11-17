@@ -24,4 +24,9 @@ function alertMessage()
   	$( ".alert-success" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
 }
 
-
+$(document).ready(function(){
+	$("#toggle-show").click(function(){
+		var tableID = $(this).attr("class");
+	    $("#table" + tableID + "-content").toggle("fast");
+	});
+});

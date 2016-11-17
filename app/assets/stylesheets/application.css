@@ -228,6 +228,19 @@ button
 	padding: 10px;
 }
 
+#toggle-show
+{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+
+}
+#toggle-show:hover
+{
+	cursor:pointer;
+}
+
 tr
 {
 	border-radius: 5px;

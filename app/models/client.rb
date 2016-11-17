@@ -22,7 +22,10 @@ class Client < ApplicationRecord
   	if self.name.gsub(/\s+/m, ' ').strip.split(" ").count > 1
   		self.name.gsub(/\s+/m, ' ').strip.split(" ")[-1]
   	end
-  	
+  end
+
+  def first_last_name
+  	"#{first_name} #{last_name}"
   end
 
   def avatar_url
