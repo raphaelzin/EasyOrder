@@ -1,3 +1,4 @@
+
 <div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
 
 <div class="col-lg-4 col-md-4" id="profile">
@@ -14,6 +15,7 @@
 	
 	<h5><%=link_to "Call waiter", toggle_request_table_path(current_client.table,table_id: current_client.table), user: 2, method: :post %></h5>
 	<%end%>
+
 	<!-- Request Waiter End -->
 	
 	<!-- Orders -->
@@ -30,7 +32,19 @@
 		<h4>Aren't you hungry?</h4>
 	<% end %>
 	<!-- Orders End -->
+	<!-- Check out -->
+	<br><br>
+	<div>
+	<%= form_tag toggle_check_out_table_client_path(current_table,current_client) do %>
 
+			Credit <%= radio_button_tag(:payment_method, "Credit", true,:item_wrapper_class => 'inline') %>
+
+			Cash <%= radio_button_tag(:payment_method, "Cash",:item_wrapper_class => 'inline') %><br>
+			
+			<%= submit_tag 'Check out!', :class => 'btn btn-primary checkOutBtn'%>
+	<% end %>
+	</div>
+	<!-- Check out END -->
 	<% else %>
 		<%= form_for([current_table,@new]) do |f| %>
 			<%= f.label :name %><br>

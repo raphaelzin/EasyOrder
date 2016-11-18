@@ -1,6 +1,8 @@
 class TablesController < ApplicationController
   def welcome
-    # reset_session
+    if current_client.present? and current_table.present?
+      redirect_to tables_home_path
+    end
   end
 
   def redirect_to_table
@@ -26,7 +28,6 @@ class TablesController < ApplicationController
 
   def home
   	@new = Client.new
-
     if not current_table.present?
       session[:table_id] = params[:id]
     end
@@ -80,7 +81,7 @@ class TablesController < ApplicationController
 
       c.dishes = []
       c.done = false
-      flash[:error] = "Order total = #{@order.bill_value} in #{@order.dishes.count}"
+      flash[:success] = "Table finished"
     end
     if done
 

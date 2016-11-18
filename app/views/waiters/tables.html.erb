@@ -18,7 +18,9 @@
         			{ confirm: 'Is this client not done?' }, :class => 'pull-right'){}%>
 
 					<br>
-					($<%= number_with_precision(c.bill_value, :precision => 2) %>)<br>
+					($<%= number_with_precision(c.bill_value, :precision => 2) %>)
+					<span class="pull-right">Paying with <%= c.payment_method %></span>
+					<br>
 					<% link_to "Delete client", table_client_path(t,c), method: :delete %>
 
 					<div class="tableOrders">
@@ -50,7 +52,7 @@
 				</a> 
 			<% end %>
 
-			<%= link_to "Finish table", finish_table_table_path(t.waiter,table_id: t.id), method: :post, data: { confirm: 'Do you really want to Finish this table?' }%>
+			<%= link_to_if((t.clients.count != 0), 'Finish table', finish_table_table_path(t.waiter,table_id: t.id), method: :post, data: { confirm: 'Do you really want to Finish this table?' }){}%>
 
 		</div> <!-- Tables --> 
 	<%end%>

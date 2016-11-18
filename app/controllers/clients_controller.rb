@@ -56,16 +56,24 @@ class ClientsController < ApplicationController
     redirect_to waiters_tables_path
   end
 
+  def toggle_check_out
+    @client = Client.find(params[:id])
+    @client.payment_method = params[:payment_method]
+    @client.checking_out = !@client.checking_out
+    @client.save!
+    redirect_to :back
+  end
+
   def toggle_done
     @client = Client.find(params[:id])
     @client.checking_out = false
     @client.done = !@client.done
     @client.save
-    redirect_to :back
+    redirect_to tables_home_path(@client.table)
   end
 
   def client_params
-  	params.require(:client).permit(:name,:table_id, :avatar, :uid, :fbid)
+  	params.require(:client).permit(:name,:table_id, :avatar, :uid, :fbid, :payment_method)
   end
 
   def lookup_table

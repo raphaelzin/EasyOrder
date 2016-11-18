@@ -26,6 +26,11 @@ body
 	/*overflow: hidden;*/
 }
 
+.checkOutBtn
+{
+	width: 100px;
+}
+
 .dishPicture
 {
 	height: 50px;

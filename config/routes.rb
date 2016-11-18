@@ -38,7 +38,6 @@ Rails.application.routes.draw do
   	resources :clients do
   		post :add_dish, on: :member
       post :remove_dish, on: :member
-
       post :toggle_check_out, on: :member
       post :toggle_done, on: :member
   	end
