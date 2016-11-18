@@ -75,7 +75,11 @@
 					<%= d.description %><br>
 				</div>
 				 <div class="text-left col-xl-2 col-md-2" style="padding-right: 0px;">
-				<%= link_to "Order", add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: { confirm: 'Confirm your order' }, class: "btn btn-success pull-right order-btn" %>
+
+				 	<!-- <%= current_client.inspect %> -->
+				<%= link_to_if((current_client.present? and not current_client.done), 'Order',add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: 
+        			{ confirm: 'Confirm your order' }, :class => 'btn btn-success pull-right order-btn'){}%>
+
 				</div>
 			<!-- Dish END -->
 
@@ -87,6 +91,7 @@
 
 		
 	</div>
-</div>
+</div><br>
+Table's code: <%= current_table.code %>
 <br>
 </div>

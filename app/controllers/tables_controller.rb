@@ -10,6 +10,7 @@ class TablesController < ApplicationController
       if current_client.present?
         @client = current_client
         @client.table = @table
+        @client.done = false
         @client.save
       end
 			session[:table_id] = @table.id
@@ -25,13 +26,15 @@ class TablesController < ApplicationController
 
   def home
   	@new = Client.new
+
     if not current_table.present?
       session[:table_id] = params[:id]
     end
 
     if current_client.present?
-      if current_table != current_client.table
-        redirect_to tables_home_path
+      if not current_client.table.present?
+        reset_session
+        redirect_to root_path
       end
     end
   end
@@ -57,6 +60,47 @@ class TablesController < ApplicationController
       redirect_to :back
     end
   end
+
+    def finish_table
+    @table = Table.find(params[:table_id])
+    done = true
+
+    @order = Order.new
+
+    @table.clients.each do |c|
+      if !c.done
+        done = false
+        flash[:error] = "All clients must be done before finishing the table"
+        redirect_to :back
+        return
+      end
+      c.dishes.each do |d|
+        @order.dishes << d
+      end
+
+      c.dishes = []
+      c.done = false
+      flash[:error] = "Order total = #{@order.bill_value} in #{@order.dishes.count}"
+    end
+    if done
+
+      if @order.bill_value > 0
+        @order.waiter = @table.waiter
+        @order.client = @table.clients.first
+        @order.save!
+      end
+
+      @table.clients = []
+      @table.requested = false
+      # Generate a random word with 8 characters
+      o = [('1'..'9'),('a'..'z')].map { |i| i.to_a }.flatten
+      @table.code = (0...8).map { o[rand(o.length)] }.join
+      # End
+
+      @table.save
+      redirect_to waiters_tables_path
+    end
+  end 
 
   def toggle_request
     @table = Table.find(params[:table_id])

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   resources :tables do
     post :toggle_request, on: :member
+    post :finish_table, on: :member
   	resources :clients do
   		post :add_dish, on: :member
       post :remove_dish, on: :member

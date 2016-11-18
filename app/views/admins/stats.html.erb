@@ -1,2 +1,16 @@
-<h1>Admins#stats</h1>
-<p>Find me in app/views/admins/stats.html.erb</p>
+<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
+
+
+	<% Order.all.each do |o|  %>
+		<hr>
+
+		<% o.inspect %><br>	
+		Order created at: <%= o.created_at.localtime.strftime("%T - %B, %-d - %Y ") %><br>
+		<% o.dishes.each do |d|%>
+			<%= d.title %><br>
+		<% end %>
+		<br>
+		Total: $<%= number_with_precision(o.bill_value, :precision => 2) %>
+
+	<% end %>
+</div>

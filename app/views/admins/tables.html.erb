@@ -4,6 +4,9 @@
 <!-- <hr> -->
 <table class="table table-bordered">
 	<% @tables.each do |t| %>
+		<% if t.number == 0 %>
+			<% next %>
+		<% end %>
 		<tr>
 			<td>
 				<div class="text-left col-xl-6 col-md-6">

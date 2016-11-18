@@ -18,15 +18,9 @@
 
 function alertMessage()
 {
-	$( ".alert-error" ).hide();
+	$( ".alert-danger" ).hide();
 	$( ".alert-success" ).hide();
-  	$( ".alert-error" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
+  	$( ".alert-danger" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
   	$( ".alert-success" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
 }
 
-$(document).ready(function(){
-	$("#toggle-show").click(function(){
-		var tableID = $(this).attr("class");
-	    $("#table" + tableID + "-content").toggle("fast");
-	});
-});
