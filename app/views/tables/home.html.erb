@@ -7,7 +7,8 @@
 	<% image_tag current_client.avatar.url(:medium), class: "avatar img-circle" %>
 	<img src="<%= current_client.avatar_url %>" class="img-circle avatar"><br>
 
-	<h3> <%= current_client.first_name %> <%= current_client.last_name %> </h3>
+	<h3> <%= current_client.first_name %> 
+		<%= current_client.last_name %> </h3>
 	<!-- Request Waiter -->
 	<% if current_client.table.requested %>
 		<h5>Waiter has been called</h5>
@@ -32,18 +33,30 @@
 		<h4>Aren't you hungry?</h4>
 	<% end %>
 	<!-- Orders End -->
+
 	<!-- Check out -->
-	<br><br>
-	<div>
-	<%= form_tag toggle_check_out_table_client_path(current_table,current_client) do %>
+	
+	<% if not current_client.payment_method.present? %>
+	<br>
+		<a id="toggle-payment" class="btn btl-xs btn-success">
+					Select check out option
+				</a>
+		<div id="check-out">
+			<%= form_tag toggle_check_out_table_client_path(current_table,current_client) do %>
+					Credit <%= radio_button_tag(:payment_method, "Credit", true,:item_wrapper_class => 'inline') %>
+					Cash <%= radio_button_tag(:payment_method, "Cash",:item_wrapper_class => 'inline') %><br>
+					<%= submit_tag 'Check out!', :class => 'btn btn-primary checkOutBtn'%>
+			<% end %>
+		</div>
+	<% else %>
+		<div style="color:#24BD4B; margin-bottom:5px; font-size:16px;">
+			Paying with <%= current_client.payment_method %>
+		</div>
 
-			Credit <%= radio_button_tag(:payment_method, "Credit", true,:item_wrapper_class => 'inline') %>
-
-			Cash <%= radio_button_tag(:payment_method, "Cash",:item_wrapper_class => 'inline') %><br>
-			
-			<%= submit_tag 'Check out!', :class => 'btn btn-primary checkOutBtn'%>
+		<%= link_to "Cancel Check out",cancel_check_out_table_client_path(current_table,current_client), method: :cancel_check_out, class: "btn-sm btn-danger" %>
+		<br><br>
 	<% end %>
-	</div>
+
 	<!-- Check out END -->
 	<% else %>
 		<%= form_for([current_table,@new]) do |f| %>
@@ -52,17 +65,20 @@
 			<%= f.submit "Login", class: "btn btn-primary" %>
 		<% end %>
 	<% end %>
-
-	<hr>
-	<div class="col-xs-12 col-md-12 people-on-table">
-		Who's on the table<br>
-		<% current_table.clients.each do |c| %>
-			<div class="col-xs-4">
-				<img src="<%= c.avatar_url %>" class="img-circle thumb"><br>
-				<%= c.first_name %>
-			</div>
-		<% end %>
-	</div>
+	<!-- Who's on the table -->
+	<% if current_table.clients.count > 1 %>
+		<hr>
+		<div class="col-xs-12 col-md-12 people-on-table">
+			Who's on the table<br>
+			<% current_table.clients.each do |c| %>
+				<div class="col-xs-4">
+					<img src="<%= c.avatar_url %>" class="img-circle thumb"><br>
+					<%= c.first_name %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+	<!-- Who's on the table END-->
 	<br>
 	<hr>
 </div>
@@ -93,7 +109,6 @@
 				 	<!-- <%= current_client.inspect %> -->
 				<%= link_to_if((current_client.present? and not current_client.done), 'Order',add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: 
         			{ confirm: 'Confirm your order' }, :class => 'btn btn-success pull-right order-btn'){}%>
-
 				</div>
 			<!-- Dish END -->
 

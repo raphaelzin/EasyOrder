@@ -43,6 +43,18 @@ class WaitersController < ApplicationController
 
       render json: calling
     end
+
+    def clients_checking_out
+      checking_out = []
+      Table.all.each do |t|
+        t.clients.each do |c|
+          if c.payment_method.present? and not c.done
+            checking_out << t.id
+          end
+        end
+      end
+      render json: checking_out
+    end
     
     def destroy
       @waiter = Waiter.find(params[:id])

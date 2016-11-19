@@ -97,11 +97,14 @@ hr
 	display: inline-block;
 }
 
-
-
 .calling
 {
 	background-color: #f00;
+}
+
+.checking_out
+{
+	background-color: #24BD4B;
 }
 
 .tableHome

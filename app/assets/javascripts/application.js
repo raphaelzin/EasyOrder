@@ -24,3 +24,11 @@ function alertMessage()
   	$( ".alert-success" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
 }
 
+$(document).ready(function(){
+	$("#check-out").hide();
+	$("#toggle-payment").click(function(){
+	    $("#check-out").toggle("fast");
+	});
+});
+
+

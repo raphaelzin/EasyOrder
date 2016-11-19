@@ -13,6 +13,7 @@ class TablesController < ApplicationController
         @client = current_client
         @client.table = @table
         @client.done = false
+        @client.payment_method = nil
         @client.save
       end
 			session[:table_id] = @table.id
@@ -47,7 +48,6 @@ class TablesController < ApplicationController
   def create
   	@table = Table.new(table_params)
   	if @table.save
-  		#flash
   		redirect_to admins_tables_path
   	end
   end

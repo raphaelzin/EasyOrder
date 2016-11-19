@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   delete 'admin_sign_out' => 'admin_sessions#destroy'
 
   get "waiters/tables_calling"
+  get "waiters/clients_checking_out"
 
   resources :tables do
     post :toggle_request, on: :member
@@ -38,7 +39,9 @@ Rails.application.routes.draw do
   	resources :clients do
   		post :add_dish, on: :member
       post :remove_dish, on: :member
+      
       post :toggle_check_out, on: :member
+      post :cancel_check_out, on: :member
       post :toggle_done, on: :member
   	end
   end

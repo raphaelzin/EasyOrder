@@ -33,10 +33,10 @@
       </div>
     <%end%>
 
-    <% current_admin.inspect %>
-    <% current_client.inspect %>
-    <% current_waiter.inspect %>
-    <% current_table.inspect %>
+    <%= "Admin: #{current_admin.present?}" %> - 
+    <%= "Client: #{current_client.present?}" %> - 
+    <%= "Waiter: #{current_waiter.present?}" %> -
+    <%= "Table: #{current_table.present?}" %> <br>
 
     <%= yield %>
 

@@ -64,12 +64,19 @@ class ClientsController < ApplicationController
     redirect_to :back
   end
 
+  def cancel_check_out
+    @client = Client.find(params[:id])
+    @client.payment_method = nil
+    @client.save!
+    redirect_to tables_home_path(@client.table)
+  end
+
   def toggle_done
     @client = Client.find(params[:id])
     @client.checking_out = false
     @client.done = !@client.done
     @client.save
-    redirect_to tables_home_path(@client.table)
+    redirect_to waiters_tables_path
   end
 
   def client_params
