@@ -4,7 +4,6 @@
 <div class="col-lg-4 col-md-4" id="profile">
 
 	<% if current_client.present? %><br>
-	<% image_tag current_client.avatar.url(:medium), class: "avatar img-circle" %>
 	<img src="<%= current_client.avatar_url %>" class="img-circle avatar"><br>
 
 	<h3> <%= current_client.first_name %> 

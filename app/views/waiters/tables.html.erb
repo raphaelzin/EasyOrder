@@ -42,7 +42,7 @@
 					<br>
 					Total: <%= number_with_precision(t.bill_value, :precision => 2) %>
 					<br>
-					<%= link_to_if(t.requested, "toggle requested", toggle_request_table_path(t,table_id: t, user: 1), method: :post){}%>
+					<%= link_to_if(t.requested, "Toggle requested", toggle_request_table_path(t,table_id: t, user: 1), method: :post){}%>
 
 				<%else%>
 					Empty Table

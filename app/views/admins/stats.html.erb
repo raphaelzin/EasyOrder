@@ -1,4 +1,29 @@
-<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
+<div id="stats-container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
+
+<%
+	# days = Order.group_by_day_of_week(:created_at).sum(bill_value) 
+
+
+data = {
+  labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satursday", "Sunday"],
+  datasets: [
+    {
+        label: "My First dataset",
+        backgroundColor: "rgba(220,20,40,1)",
+        borderColor: "rgba(220,220,220,1)",
+        data: [65, 59, 80, 81, 56, 55, 40]
+    },
+    # {
+    #     label: "My Second dataset",
+    #     backgroundColor: "rgba(151,187,205,1)",
+    #     borderColor: "rgba(151,187,205,1)",
+    #     data: [28, 48, 40, 19, 86, 27, 90]
+    # }
+  ]
+}
+options = {:height => "150"}%>
+<%= bar_chart data, options %>
+
 
 
 	<% Order.all.each do |o|  %>
@@ -13,4 +38,25 @@
 		Total: $<%= number_with_precision(o.bill_value, :precision => 2) %>
 
 	<% end %>
+
+
 </div>
+
+
+<script type="text/javascript">
+var LineChart = {
+    labels: ["Ruby", "jQuery", "Java", "ASP.Net", "PHP"],
+    datasets: [{
+        fillColor: "rgba(151,249,190,0.5)",
+        strokeColor: "rgba(255,255,255,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        data: [10, 20, 30, 40, 50]
+    }, {
+        fillColor: "rgba(252,147,65,0.5)",
+        strokeColor: "rgba(255,255,255,1)",
+        pointColor: "rgba(173,173,173,1)",
+        pointStrokeColor: "#fff",
+        data: [28, 68, 40, 19, 96]
+    }]
+}

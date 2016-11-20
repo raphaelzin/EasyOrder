@@ -1,4 +1,5 @@
 class TablesController < ApplicationController
+
   def welcome
     if current_client.present? and current_table.present?
       redirect_to tables_home_path
@@ -47,9 +48,16 @@ class TablesController < ApplicationController
 
   def create
   	@table = Table.new(table_params)
-  	if @table.save
-  		redirect_to admins_tables_path
-  	end
+    begin
+    	if @table.save!
+    		redirect_to admins_tables_path
+    	end
+      rescue ActiveRecord::RecordInvalid => e
+        if e.message == "Validation failed: Number has already been taken"
+          flash[:error] = "The table's number has to be unique"
+          redirect_to admins_tables_path
+        end
+    end
   end
 
   def update
@@ -62,7 +70,7 @@ class TablesController < ApplicationController
     end
   end
 
-    def finish_table
+  def finish_table
     @table = Table.find(params[:table_id])
     done = true
 
@@ -111,13 +119,14 @@ class TablesController < ApplicationController
   end
 
   def destroy
-    @table = Table.find(table_params[:id])
+    @table = Table.find(params[:id])
     @table.destroy
     redirect_to :back
   end
 
+
   def table_params
-  	params.require(:table).permit(:code,:number,:waiter_id)
+  	params.require(:table).permit(:id, :code, :number, :waiter_id, :requested)
   end 
 
 end

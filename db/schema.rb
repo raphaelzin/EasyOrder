@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20161117174324) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admins", force: :cascade do |t|
     t.string   "name"
     t.string   "password_digest", null: false
@@ -28,14 +31,9 @@ ActiveRecord::Schema.define(version: 20161117174324) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
-    t.integer  "fbid"
     t.integer  "table_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "provider"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
@@ -43,7 +41,7 @@ ActiveRecord::Schema.define(version: 20161117174324) do
     t.boolean  "checking_out"
     t.boolean  "done"
     t.string   "payment_method"
-    t.index ["table_id"], name: "index_clients_on_table_id"
+    t.index ["table_id"], name: "index_clients_on_table_id", using: :btree
   end
 
   create_table "clients_dishes", id: false, force: :cascade do |t|
@@ -63,7 +61,7 @@ ActiveRecord::Schema.define(version: 20161117174324) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
-    t.index ["category_id"], name: "index_dishes_on_category_id"
+    t.index ["category_id"], name: "index_dishes_on_category_id", using: :btree
   end
 
   create_table "dishes_orders", id: false, force: :cascade do |t|
@@ -76,13 +74,8 @@ ActiveRecord::Schema.define(version: 20161117174324) do
     t.integer  "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_orders_on_client_id"
-    t.index ["waiter_id"], name: "index_orders_on_waiter_id"
-  end
-
-  create_table "pictures", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_orders_on_client_id", using: :btree
+    t.index ["waiter_id"], name: "index_orders_on_waiter_id", using: :btree
   end
 
   create_table "tables", force: :cascade do |t|
@@ -92,7 +85,7 @@ ActiveRecord::Schema.define(version: 20161117174324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "requested"
-    t.index ["waiter_id"], name: "index_tables_on_waiter_id"
+    t.index ["waiter_id"], name: "index_tables_on_waiter_id", using: :btree
   end
 
   create_table "waiters", force: :cascade do |t|
@@ -104,4 +97,8 @@ ActiveRecord::Schema.define(version: 20161117174324) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "clients", "tables"
+  add_foreign_key "orders", "clients"
+  add_foreign_key "orders", "waiters"
+  add_foreign_key "tables", "waiters"
 end

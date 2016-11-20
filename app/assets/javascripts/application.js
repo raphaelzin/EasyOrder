@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap.min
+//= require Chart.bundle.min
 //= require_tree .
 
 function alertMessage()

@@ -26,6 +26,16 @@ body
 	/*overflow: hidden;*/
 }
 
+#stats-container
+{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding: 0px 40px 0px 40px;
+	background-color: #FFF;
+	border-radius: 16px;
+	overflow: scroll;
+}
+
 .checkOutBtn
 {
 	width: 100px;
