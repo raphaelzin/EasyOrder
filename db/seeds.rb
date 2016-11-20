@@ -46,3 +46,6 @@ dish = Dish.create :title => "Taco Burgers", :category_id => 2, :price => 8.90, 
 dish = Dish.create :title => "Chicken Caesar Burger", :category_id => 2, :price => 7.90, :description => "Wedge that salad between a bun like they do on blog Iowa Girl Eats with a ground chicken burger, parm, and Caesar dressing."
 dish = Dish.create :title => "Canyon Creek Burger", :category_id => 2, :price => 12.90, :description => "Like breakfast, but better: This formidable burger recipe from blog Iowa Girl Eats stacks bacon, egg, fried jalapeños on a cheesy, beefy patty and then tops it off with a slick of blackberry jam or grape jelly."
 dish = Dish.create :title => "Turkey Burger with a Twist", :category_id => 2, :price => 5.90, :description => "Blogger Spinach Tiger invents a zesty burger recipe with dark-meat turkey, fresh spinach, Worcestershire sauce, and an unlikely pop of flavor from chopped, dried plums. (Figs, cranberries, or raisins would work, too.)"
+
+
+
