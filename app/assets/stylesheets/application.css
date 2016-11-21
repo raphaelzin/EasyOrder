@@ -17,6 +17,10 @@
  *= require_self
  */
 
+.inline-btn
+{
+	display: inline;
+}
 
 body
 {

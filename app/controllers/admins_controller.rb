@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  helper_method :value_at_weekday, :value_for_hour
+  helper_method :value_at_weekday, :value_for_hour, :value_for_waiter
 
   def create
     @admin = Admin.new(admin_params)
@@ -11,7 +11,6 @@ class AdminsController < ApplicationController
 
   def staff
     nonAdminRedirect
-
 
     @new = Waiter.new
     @waiters = Waiter.all
@@ -42,7 +41,20 @@ class AdminsController < ApplicationController
 
   def stats
     nonAdminRedirect
-    #create_random_data
+    @orders = Order.all
+    if (params[:start_date].present? and params[:start_date][0] != "") && (params[:end_date].present? and params[:end_date][0] != "")
+      @start_date = params[:start_date][0].to_date.beginning_of_day
+      @end_date = params[:end_date][0].to_date.end_of_day
+
+      @orders = Order.search(@start_date, @end_date)
+    end
+    flash[:success] = params[:commit]
+
+    params[:start_date] = nil
+    params[:end_date] = nil
+    params[:commit] = nil
+    
+    # create_random_data
   end
 
   def settings
@@ -62,12 +74,12 @@ class AdminsController < ApplicationController
     end
   end
 
-  def value_at_weekday
+  def value_at_weekday(orders)
     totalWeekDay = []
 
     for i in 0..6
       total = 0
-      Order.all.each do |o|
+      orders.each do |o|
         if o.created_at.wday == i
           total = total + o.bill_value
         end
@@ -77,12 +89,13 @@ class AdminsController < ApplicationController
     totalWeekDay
   end
 
-  def value_for_hour
+  def value_for_hour(orders)
     
-    totalHours = []
+    totalHours = Hash.new
+
     for i in 0..23
       total = 0
-      Order.all.each do |o|
+      orders.each do |o|
         if o.created_at.localtime.hour == i
           total = total + o.bill_value
         end
@@ -92,9 +105,23 @@ class AdminsController < ApplicationController
     totalHours
   end
 
+  def value_for_waiter(orders)
+    totalHash = Hash.new
+    Waiter.all.each do |w|
+      total = 0
+      w.orders.each do |o|
+        if orders.include? o
+          total += o.bill_value
+        end
+      end
+      totalHash[w.name] = total.round(2)
+    end
+    totalHash
+  end
+
   def create_random_data
 
-    for i in 0..50
+    for i in 0..80
 
 
       @dish1 = Dish.find( 1 + rand(10) )
@@ -112,8 +139,8 @@ class AdminsController < ApplicationController
       @order.waiter = @waiter
       @order.client = @client
 
-      @order.created_at = rand(10.days).seconds.ago
-      @order.updated_at = rand(10.days).seconds.ago
+      @order.created_at = rand((1 + rand(7)).days).seconds.ago
+      @order.updated_at = rand((1 + rand(7)).days).seconds.ago
 
       @order.save
 

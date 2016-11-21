@@ -1,51 +1,101 @@
 <div id="stats-container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
 
+
+<h2>Orders between dates</h2>
+
+
+<%= form_tag admins_stats_path, :method => 'get', class: "form-inline inline-btn" do%>
+    <label>Begin</label>
+    <%= date_field :start_date, params[:start_date], :value => Time.now.strftime("%Y-%m-%d") %> 
+    <label>End</label>
+    <%= date_field :end_date, params[:end_date], :value => Time.now.strftime("%Y-%m-%d") %>
+    <%= submit_tag "Search", :name => "Search", :value => "Search", class: "form-control btn btn-primary", 'data-disable-with' => "Please wait.." %>
+<% end %>
+
+<%= form_tag admins_stats_path, :method => 'get', class: "form-inline inline-btn" do%>
+    <%= submit_tag "Show All", :name => "Show All", :value => "Show All", class: "form-control btn btn-primary inline-btn", 'data-disable-with' => "Please wait.." %>
+<% end %>
+<hr>
+
+<% total = 0 %>
+<% @orders.each do |o|  %>
+    <% total+=o.bill_value %>
+<% end %>
+<h3><%= @orders.count %> orders selected </h3>
+<% if @start_date.present? and @end_date.present? and ((@end_date - @start_date).to_i / 1.day) > 1 %>
+    <h5>Orders between <%= @start_date.strftime("%B, %-d") %> and <%= @end_date.strftime("%B, %-d") %></h5>
+<% end %>
+<h4>Total: $<%= number_with_precision(total, :precision => 2)%>
+    <% if @start_date.present? and @end_date.present? and ((@end_date - @start_date).to_i / 1.day) > 1 %>
+    - <%= number_with_precision(total / ((@end_date - @start_date).to_i / 1.day), :precision => 2) %>/day
+    <% end %>
+</h4>
+<hr>
+
+
 <%
 data = {
   labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satursday"],
   datasets: [
     {
-        label: "Total Sold",
+        label: "Total sold By week day",
         backgroundColor: "rgba(124,223,134,1)",
         borderColor: "rgba(220,220,220,1)",
-        data: bills_value_at_weekday
+        data: value_at_weekday(@orders)
     }
   ]
 }
 
 dataHours = {
-  labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
+  labels: value_for_hour(@orders).keys,
   datasets: [
     {
-        label: "Total Sold",
+        label: "Total sold by hour",
         backgroundColor: "rgba(124,223,134,1)",
         borderColor: "rgba(220,220,220,1)",
-        data: bills_value_for_hour
+        data: value_for_hour(@orders).values
     }
   ]
 }
 
+dataWaiters = {
+  labels: value_for_waiter(@orders).keys,
+  datasets: [
+    {
+        label: "Total sold by Waiter",
+        backgroundColor: "rgba(124,223,134,1)",
+        borderColor: "rgba(220,220,220,1)",
+        data: value_for_waiter(@orders).values
+    }
+  ]
+}
 
-options = {:height => "150", :beginAtZero => true}
-optionsHours = {:height => "150"}%>
+options = {:height => "100", :scaleBeginAtZero => true}
+optionsHours = {:height => "100", :scaleBeginAtZero => true}
+optionsWaiters = {:height => "100", :scaleBeginAtZero => true}
+%>
 
 <h2>Sales by weekday</h2>
-<%= line_chart data, options %>
+<%= bar_chart data, options %>
+
 <h2>Sales by hour</h2>
-<%= line_chart dataHours, optionsHours %>
+<%= bar_chart dataHours, optionsHours %>
 
-
-
-	<% Order.all.each do |o|  %>
-		<hr>
-
+<h2>Sales by Waiter</h2>
+<%= bar_chart dataWaiters, optionsWaiters %>
+	<% @orders.each do |o|  %>
+		
 		<% o.inspect %><br>	
 		Order created at: <%= o.created_at.localtime.strftime("%T - %B, %-d - %Y ") %><br>
 		<% o.dishes.each do |d|%>
 			<%= d.title %><br>
 		<% end %>
+        <% total += o.bill_value %>
 		<br>
+        
 		Total: $<%= number_with_precision(o.bill_value, :precision => 2) %>
-
-	<% end %>
+        <hr>
+	<% end %><br>
+    <hr>
+    
 </div>
