@@ -1,12 +1,9 @@
-
 <div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
-
 <div class="col-lg-4 col-md-4" id="profile">
 
 	<% if current_client.present? %><br>
 	<img src="<%= current_client.avatar_url %>" class="img-circle avatar"><br>
-	<h3> <%= current_client.first_name %> 
-		<%= current_client.last_name %> </h3>
+	<h3> <%= current_client.first_last_name %> </h3>
 	<!-- Request Waiter -->
 	<% if current_client.table.requested %>
 		<h5>Waiter has been called</h5>
@@ -91,6 +88,7 @@
 
 			<% c.dishes.each do |d| %>
 			<tr>
+
 			<td>
 			<!-- Dish -->
 
@@ -100,25 +98,61 @@
 
 				<div class="text-left col-xl-9 col-md-9">
 					<%= d.title %> ($ <%= d.price %>)<br>
-					<%= d.description %><br>
+					<% d.description %><br>
 				</div>
 				 <div class="text-left col-xl-2 col-md-2" style="padding-right: 0px;">
 
 				 	<!-- <%= current_client.inspect %> -->
-				<%= link_to_if((current_client.present? and not current_client.done), 'Order',add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: 
-        			{ confirm: 'Confirm your order' }, :class => 'btn btn-success pull-right order-btn'){}%>
+
+				 <button id="<%= d.id %>" class="toggle-details pull-right btn btn-info">More</button>	
 				</div>
 			<!-- Dish END -->
 
 			</td>
+
+
 			</tr>
+			<!-- Details -->
+			<tr id="dish-<%= d.id %>-details" class="dish-details-data">
+				<td class="menuData">
+					<div class="col-xl-12 col-md-12">
+						<%= image_tag d.picture.url, class: "dishPicture img-circle" %>
+					</div>
+					<div class="text-left col-xl-12 col-md-12">
+						<h3><%= d.title %></h3>
+						<%= d.description %><br>
+					</div>
+					<div class="text-left col-xl-12 col-md-12">
+					<%= link_to_if((current_client.present? and not current_client.done), "Order $#{number_with_precision(d.price, :precision => 2)}",add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: 
+	    			{ confirm: 'Confirm your order' }, :class => 'btn btn-success pull-right order-btn '){}%>
+					</div>
+				</td>
+			</tr>
+			<!-- Details END -->
 			<% end %>
 			</table>
 		<% end %>
-
-		
 	</div>
 </div><br>
 Table's code: <%= current_table.code %>
 <br>
 </div>
+
+<script>
+$( document ).ready(function(){
+
+	$("#check-out").hide();
+	$(".dish-details-data").hide()
+
+	$("#toggle-payment").click(function(){
+	    $("#check-out").toggle("fast");
+	});
+
+	$(".toggle-details").click(function(){
+		var dishID = $(this).attr("id");
+	    $("#dish-" + dishID + "-details").toggle("fast");
+	   
+	});
+});
+
+</script>

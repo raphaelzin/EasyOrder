@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require bootstrap.min
 //= require Chart.bundle.min
+
+//= require jquery.turbolinks
 //= require_tree .
 
 function alertMessage()
@@ -25,11 +27,5 @@ function alertMessage()
   	$( ".alert-success" ).fadeIn(500).delay( 3000 ).fadeOut( 500 );
 }
 
-$(document).ready(function(){
-	$("#check-out").hide();
-	$("#toggle-payment").click(function(){
-	    $("#check-out").toggle("fast");
-	});
-});
 
 

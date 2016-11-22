@@ -52,7 +52,6 @@ class AdminsController < ApplicationController
 
     params[:start_date] = nil
     params[:end_date] = nil
-    params[:commit] = nil
     
     # create_random_data
   end
@@ -100,7 +99,7 @@ class AdminsController < ApplicationController
           total = total + o.bill_value
         end
       end
-      totalHours[i] = total.round(2)
+      totalHours["#{i}:00"] = total.round(2)
     end
     totalHours
   end

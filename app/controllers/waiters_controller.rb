@@ -32,6 +32,8 @@ class WaitersController < ApplicationController
       non_waiter_redirect
   		@tables = Table.all
       session[:client_id] = nil
+
+      session[:table_id] = nil
   	end
 
     def tables_calling

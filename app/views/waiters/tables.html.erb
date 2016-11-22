@@ -50,9 +50,9 @@
 			</div> <!-- TableX-content -->
 
 			<% if t.clients.count != 0 %>
-				<a id="toggle-show" class="<%= t.number %>">
+				<a class="toggle-show" id="<%= t.number %>">
 					- Toggle show -
-				</a> 
+				</a>
 			<% end %>
 
 			<%= link_to_if((t.clients.count != 0), 'Finish table', finish_table_table_path(t.waiter,table_id: t.id), method: :post, data: { confirm: 'Do you really want to Finish this table?' }){}%>
@@ -85,9 +85,9 @@ function updateTables() {
   });
 }
 
-$(document).ready(function(){
-	$("#toggle-show").click(function(){
-		var tableID = $(this).attr("class");
+$( document ).ready(function(){
+	$(".toggle-show").click(function(){
+		var tableID = $(this).attr("id");
 	    $("#table" + tableID + "-content").toggle("fast");
 	});
 });

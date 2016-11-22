@@ -22,12 +22,16 @@
 	display: inline;
 }
 
+.hidden
+{
+	display: none;
+}
+
 body
 {
 	background-color: #5780E9;
 	font-family: 'Varela Round', sans-serif;
 	color: #000;
-	/*overflow: hidden;*/
 }
 
 #stats-container
@@ -251,7 +255,7 @@ button
 	padding: 10px;
 }
 
-#toggle-show
+.toggle-show
 {
 	display: block;
 	margin-right: auto;
@@ -259,7 +263,7 @@ button
 	text-align: center;
 
 }
-#toggle-show:hover
+.toggle-show:hover
 {
 	cursor:pointer;
 }
@@ -280,6 +284,11 @@ tr
     left: 0;
     width: 100%;
 }
+.details-btn
+	{
+		display:none;
+	}
+
 
 
 
@@ -287,6 +296,12 @@ tr
 @media only screen and (max-width: 992px)
 {
 	h1{}
+
+	.details-btn
+	{
+		display:none;
+	}
+
 	#container
 	{
 		margin-left: 40px;
@@ -414,6 +429,10 @@ tr
 		height: 100px;
 		width: 100px;
 	}
+	.details-btn
+	{
+		display:none;
+	}
 }
 
 
@@ -421,10 +440,26 @@ tr
 {
 	h1{}
 
+	#dish-buttons
+	{
+		margin-top: -15px;
+	}
+
+	#dish-text
+	{
+		text-overflow: ellipsis;
+	}
+
+	#category
+	{
+		padding-left: 5px;
+	}
+
 	.dishPicture
 	{
-		height: 100px;
-		width: 100px;
+		height: 60px;
+		width: 60px;
+
 	}
 
 	#container
@@ -435,7 +470,7 @@ tr
 
 	.dishPictureHome
 	{
-		padding-left: 15px;
+		padding-left: 0px;
 		margin-right: 0px;
 	}
 
@@ -482,7 +517,9 @@ tr
 	#menu
 	{
 		height: auto;
+		padding: 0px;
 		overflow-y: scroll;
+		border-left: none;
 	}
 
 	#profile
@@ -499,5 +536,15 @@ tr
 	h5
 	{
 		font-size: 18px;
+	}
+
+	.dish-details-data
+	{
+		background-color: #ddd;
+	}
+
+	.details-btn
+	{
+		display:block;
 	}
 }
