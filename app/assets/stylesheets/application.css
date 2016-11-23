@@ -22,7 +22,7 @@
 	display: inline;
 }
 
-.hidden
+.mobile-profile
 {
 	display: none;
 }
@@ -60,6 +60,8 @@ body
 {
 	padding: 0px;
 	margin-right: 0px;
+	height: 100px;
+	width: 100px;
 }
 
 
@@ -179,6 +181,9 @@ button
 	border-style: solid;
 	border-width: 2px;
 	border-color: #5780E9;
+
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 #orders
@@ -198,12 +203,8 @@ button
 
 #menu
 {
-	/*border-style: solid;*/
-	/*height: 100vh;*/
 	height: 100%;
-
 	overflow-y: scroll;
-
 	border-left: 2px solid #5780E9;
 }
 
@@ -355,6 +356,15 @@ tr
 		height: 100px;
 		width: 100px;
 	}
+	#profile
+	{
+		display: none;
+	}
+	.mobile-profile
+	{
+		display: block;
+		text-align: center;
+	}
 }
 
 @media only screen and (max-width: 768px)
@@ -433,7 +443,22 @@ tr
 	{
 		display:none;
 	}
+	.dishPictureHome
+	{
+		padding-left: 0px;
+		margin-right: 0px;
+	}
+	#profile
+	{
+		display: none;
+	}
+	.mobile-profile
+	{
+		display: block;
+	}
 }
+
+
 
 
 @media only screen and (max-width: 480px)
@@ -457,9 +482,14 @@ tr
 
 	.dishPicture
 	{
-		height: 60px;
-		width: 60px;
+		height: 100px;
+		width: 100px;
+	}
 
+	.detailImages
+	{
+		height: 100px;
+		width: 100px;
 	}
 
 	#container
@@ -492,13 +522,6 @@ tr
 		height: auto;
 	}
 
-/*	#profile
-	{
-		margin-left: auto;
-		margin-right: auto;
-		display: block;
-		width: 50%;
-	}*/
 	.tableCard
 	{
 		width: 95%;
@@ -540,11 +563,106 @@ tr
 
 	.dish-details-data
 	{
-		background-color: #ddd;
+		background-color: #fff;
 	}
 
 	.details-btn
 	{
 		display:block;
 	}
+
+	.dishTitle
+	{
+		padding-left: 0px;
+		font-size: 16px;
+	}
+
+	#profile
+	{
+		display: none;
+	}
+	.mobile-profile
+	{
+		display: block;
+	}
 }
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color: #fff; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 10px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    border-right: 2px solid #5780E9;
+}
+
+/* The navigation menu links */
+.closebtn a {
+    padding: 8px 8px 8px 15px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    transition: 0.2s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#container {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+.sidenav #orders
+{
+	width: 95%;
+	
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+@media screen and (max-height: 768px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.navProfile
+{
+	height: 50px;
+	width: 50px;
+	padding: 3px;
+}
+
+.mobile-profile-bar
+{
+	text-align: right;
+}
+
+.sidenav h5
+{
+	font-size: 16px;
+}
+
