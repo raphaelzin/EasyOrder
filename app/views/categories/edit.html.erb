@@ -1,20 +1,26 @@
 <div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <br>
-<h2>Edit Category</h2>
+<h2><%= t(:edit_category) %></h2>
 
-<%= form_for @category do |f| %>
-<%= f.label :name %><br>
+<%= form_for([@menu,@category]) do |f| %>
+<%= f.label t(:name) %><br>
 <%= f.text_field :name, required: true, class: "form-control"%>
 <br>
 
-<%= f.label :description %><br>
+<%= f.label t(:description) %><br>
 <%= f.text_field :description, class: "form-control"%>
+
+<br>
+<%= f.label t(:language) %><br>
+<%= f.collection_select :menu_id, Menu.all, :id, :language, include_blank: false, class: "form-control"%>
+
 
 <br><br>
 
+<%= f.submit t(:add_category), class: "btn btn-primary" %>
 
-<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-<%= f.submit "Add Category", class: "btn btn-primary" %>
+
+
 <% end %>
 <br><br>
 </div>

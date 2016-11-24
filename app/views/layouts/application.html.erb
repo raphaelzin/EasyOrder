@@ -16,22 +16,25 @@
   <body>
     <% if current_admin.present? %>
       <div id="toolbar">
-        Logged as <%= current_admin.name %> (Administrator) - 
-        <%= link_to 'Admin home', admins_home_path %> / 
-         <%= link_to "Tables", waiters_tables_path %> / <%= link_to 'Sign out', admin_sign_out_path, method: :delete %>
-
+        <%= "#{t(:logged_as)}: #{current_admin.name} (#{t(:admin)})" %> - 
+        <%= link_to t(:admin_home), admins_home_path %> / 
+         <%= link_to t(:tables), waiters_tables_path %> / <%= link_to t(:sign_out), admin_sign_out_path, method: :delete %>
          <br>
       </div>
     <% end %>
 
     <% if current_waiter.present? and not current_admin.present?%>
       <div id="toolbar">
-        Logged as <%= current_waiter.name %> - 
-        <%= link_to 'Sign out', sign_out_path, method: :delete %>
-         / <%= link_to "Back to tables", waiters_tables_path %>
+        <%= "#{t(:logged_as)}: #{current_waiter.name}" %> - 
+        <%= link_to t(:sign_out), sign_out_path, method: :delete %>
+         / <%= link_to t(:tables), waiters_tables_path %>
          <br>
       </div>
     <%end%>
+    <%= params[:locale] %>
+
+      <%= link_to "English", :locale =>'en'%>
+      <%= link_to "Português", :locale =>'pt_br'%><br>
 
     <% "Admin: #{current_admin.present?} 
      Client: #{current_client.present?}

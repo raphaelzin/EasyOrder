@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get 'admins/tables'
 
+  get 'admins/dishes'
+
   get 'admins/login'
 
   get 'tables/welcome'
@@ -52,18 +54,16 @@ Rails.application.routes.draw do
   resources :waiters
 	resources :sessions
 	resources :admin_sessions
-  resources :categories do
-  	resources :dishes
+  resources :menus do
+    resources :categories do
+    	resources :dishes
+    end
   end
-
   EasyOrder::Application.routes.draw do
     get 'auth/:provider/callback', to: 'client_sessions#create'
     get 'auth/failure', to: redirect('/')
     get 'signout', to: 'client_sessions#destroy', as: 'signout'
- 
-    resources :client_sessions, only: [:create, :destroy]
-    # resource :home, only: [:show]
- 
+
     root to: "tables#welcome"
 end
 

@@ -25,8 +25,10 @@ ActiveRecord::Schema.define(version: 20161117174324) do
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
+    t.integer  "menu_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["menu_id"], name: "index_categories_on_menu_id", using: :btree
   end
 
   create_table "clients", force: :cascade do |t|
@@ -69,6 +71,13 @@ ActiveRecord::Schema.define(version: 20161117174324) do
     t.integer "dish_id",  null: false
   end
 
+  create_table "menus", force: :cascade do |t|
+    t.string   "language"
+    t.string   "locale"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer  "waiter_id"
     t.integer  "client_id"
@@ -97,6 +106,7 @@ ActiveRecord::Schema.define(version: 20161117174324) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "categories", "menus"
   add_foreign_key "clients", "tables"
   add_foreign_key "orders", "clients"
   add_foreign_key "orders", "waiters"

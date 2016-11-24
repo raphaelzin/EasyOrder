@@ -1,45 +1,52 @@
 <div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-xs-12">
 
-<h2>Admin Home</h2>
+<h2><%= t(:admin_home) %></h2>
 <%= link_to admins_staff_path do %>
 	<div class="homeCard col-xs-12">
 		<%= image_tag "waiter", class: "cardImage"  %>
-		Staff
+		<%= t(:staff) %>
 	</div>
 <% end %>
 
 <%= link_to admins_categories_path do %>
 	<div class="homeCard col-xs-12">
 		<%= image_tag "categories_list", class: "cardImage" %>
-		Categories
+		<%= t(:categories) %>
 	</div>
 <% end %>
 
 <%= link_to admins_menu_path  do %>
 	<div class="homeCard col-xs-12">
 		<%= image_tag "menu", class: "cardImage" %>
-		Menu
+		<%= t(:menu) %>
+	</div>
+<% end %>
+
+<%= link_to admins_dishes_path  do %>
+	<div class="homeCard col-xs-12">
+		<%= image_tag "menu", class: "cardImage" %>
+		<%= t(:dishes) %>
 	</div>
 <% end %>
 
 <%= link_to admins_stats_path do %>
 	<div class="homeCard col-xs-4">
 		<%= image_tag "stats", class: "cardImage" %>
-		Stats
+		<%= t(:stats) %>
 	</div>
 <% end %>
 
 <%= link_to admins_tables_path do%>
 	<div class="homeCard col-xs-4">
 		<%= image_tag "tables", class: "cardImage" %>
-		Tables
+		<%= t(:tables) %>
 	</div>
 <% end %>
 
 <%= link_to admins_settings_path do %>
 	<div class="homeCard col-xs-4">
 		<%= image_tag "settings", class: "cardImage" %>
-		Settings
+		<%= t(:settings) %>
 	</div>
 <% end %>
 

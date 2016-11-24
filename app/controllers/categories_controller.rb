@@ -1,18 +1,19 @@
 class CategoriesController < ApplicationController
 	def create
-    	@category = Category.new(category_params)
-    
-    	if @category.save
-      	flash[:success] = 'Employee added'
-      	redirect_to admins_categories_path
-    	end
+  	@category = Category.new(category_params)
+  	if @category.save
+    	flash[:success] = t(:category_added)
+    	redirect_to admins_categories_path
   	end
+	end
 
     def edit
+      @menu = Menu.find(params[:menu_id])
       @category = Category.find(params[:id])
     end
 
     def update
+      @menu = Menu.find(params[:menu_id])
       @category = Category.find(params[:id])
       if @category.update_attributes(category_params)
         @category.save
@@ -29,6 +30,6 @@ class CategoriesController < ApplicationController
     end
 
 	def category_params
-    	params.require(:category).permit(:name, :description)
+    	params.require(:category).permit(:name, :description, :menu_id)
   	end
 end

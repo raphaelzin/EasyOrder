@@ -1,18 +1,18 @@
 <%= form_for @new do |f| %>
 
-<%= f.label :number %><br>
+<%= f.label t(:table_number) %><br>
 <%= f.number_field :number, :step => 1, min: 1, required: true, class: "form-control"%>
 <br>
-<%= f.label :code %><br>
+<%= f.label t(:code) %><br>
 <%= f.text_field :code, required: true, class: "form-control"%>
 <br>
-<%= f.label :waiter, 'Who is in charge' %>
+<%= f.label :waiter, t(:waiter_assigned) %>
   <br>
   <%= f.collection_select :waiter_id, Waiter.all, :id, :name, include_blank: false, class: "form-control"%>
   <br><br>
 
-  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t(:close) %></button>
 
-<%= f.submit "Add Table", class: "btn btn-primary" %>
+<%= f.submit t(:add_table), class: "btn btn-primary" %>
 
 <% end %>

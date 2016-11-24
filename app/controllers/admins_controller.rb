@@ -21,6 +21,7 @@ class AdminsController < ApplicationController
 
     @new = Category.new
     @categories = Category.all
+    @menu = Menu.find(1)
   end
 
   def home
@@ -31,12 +32,19 @@ class AdminsController < ApplicationController
     
   end
 
-  def menu
+  def dishes
     nonAdminRedirect
 
     @new = Dish.new
     @dishes = Dish.all
     @category = Category.find(1)
+    @menu = Menu.find(1)
+
+  end
+
+  def menu
+    nonAdminRedirect
+    @new = Menu.new
   end
 
   def stats
@@ -127,8 +135,6 @@ class AdminsController < ApplicationController
 
       @dish2 = Dish.find( 1+rand(10) )
 
-      @client = Client.find(1)
-
       @waiter = Waiter.find( 1 + rand(6) )
 
       @order = Order.new
@@ -136,7 +142,7 @@ class AdminsController < ApplicationController
       @order.dishes << @dish1
       @order.dishes << @dish2
       @order.waiter = @waiter
-      @order.client = @client
+      @order.client = Client.new
 
       @order.created_at = rand((1 + rand(7)).days).seconds.ago
       @order.updated_at = rand((1 + rand(7)).days).seconds.ago

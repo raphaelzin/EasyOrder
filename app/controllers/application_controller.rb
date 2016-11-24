@@ -1,6 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_table, :current_client, :current_waiter, :current_admin
+  before_action :set_locale
+
+  def set_locale
+    if params[:locale] != nil
+      session[:locale] = params[:locale]
+    end
+    I18n.locale = session[:locale] || I18n.default_locale
+  end
 
   def current_table
   	if session.key?(:table_id) and session[:table_id] != nil

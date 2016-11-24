@@ -1,5 +1,5 @@
 <%= form_for @new do |f| %>
-<%= f.label :name %><br>
+<%= f.label t(:name) %><br>
 <%= f.text_field :name, required: true, class: "form-control"%>
 <br>
 
@@ -8,16 +8,16 @@
 
 <br>
 
-<%= f.label :phone %><br>
+<%= f.label t(:phone) %><br>
 <%= f.text_field :phone, class: "form-control"%>
 
 <br>
-<%= f.label :password, 'Enter new password' %>
+<%= f.label :password, t(:enter_password) %>
   <br>
   <%= f.password_field :password, required: true, class: "form-control"%>
 <br>
 
-<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-<%= f.submit "Add Waiter", class: "btn btn-primary" %>
+<button type="button" class="btn btn-danger" data-dismiss="modal"><%= t(:close) %></button>
+<%= f.submit t(:add_waiter), class: "btn btn-primary" %>
 
 <% end %>

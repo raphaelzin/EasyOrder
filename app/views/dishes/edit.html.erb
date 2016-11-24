@@ -1,26 +1,26 @@
 <div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-	<h2>Edit Dish</h2>
-<%= form_for([@category,@dish]) do |f| %>
+	<h2><%= t(:edit_dish) %></h2>
+<%= form_for([@category.menu,@category,@dish]) do |f| %>
 
-	<%= f.label :title %><br>
+	<%= f.label t(:title) %><br>
 	<%= f.text_field :title, required: true, class: "form-control"%>
 
-	<%= f.label :description %><br>
+	<%= f.label t(:description) %><br>
 	<%= f.text_field :description, required: true, class: "form-control"%>
 
-	<%= f.label :observation %><br>
+	<%= f.label t(:observation) %><br>
 	<%= f.text_field :observation, class: "form-control"%>
 
-	<%= f.label :price %><br>
+	<%= f.label t(:price) %><br>
 	<%= f.number_field :price, required: true,:step => 'any', class: "form-control"%>
 
-	<%= f.label :picture %><br>
+	<%= f.label t(:picture) %><br>
 	<%= f.file_field :picture %>
 
-	<%= f.label :category %><br>
-  	<%= f.collection_select :category_id, Category.all, :id, :name, include_blank: false, class: "form-control"%>
+	<%= f.label t(:category) %><br>
+  	<%= f.collection_select :category_id, Category.all, :id, :category_with_language, include_blank: false, class: "form-control"%>
 	<br><br>
-	<%= f.submit "Save Dish", class: "btn btn-primary" %>
+	<%= f.submit t(:save_edit), class: "btn btn-primary" %>
 	<br><br>
 <% end %>
 </div>

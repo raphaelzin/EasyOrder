@@ -1,19 +1,19 @@
 <div id="stats-container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
 
 
-<h2>Orders between dates</h2>
+<h2><%= t(:orders_between_dates) %></h2>
 
 
 <%= form_tag admins_stats_path, :method => 'get', class: "form-inline inline-btn" do%>
-    <label>Begin</label>
+    <label><%= t(:begin) %></label>
     <%= date_field :start_date, params[:start_date], :value => Time.now.strftime("%Y-%m-%d") %> 
-    <label>End</label>
+    <label><%= t(:end) %></label>
     <%= date_field :end_date, params[:end_date], :value => Time.now.strftime("%Y-%m-%d") %>
-    <%= submit_tag "Search", :name => "Search", :value => "Search", class: "form-control btn btn-primary", 'data-disable-with' => "Please wait.." %>
+    <%= submit_tag t(:search), class: "form-control btn btn-primary", 'data-disable-with' => "Please wait.." %>
 <% end %>
 
 <%= form_tag admins_stats_path, :method => 'get', class: "form-inline inline-btn" do%>
-    <%= submit_tag "Show All", :name => "Show All", :value => "Show All", class: "form-control btn btn-primary inline-btn", 'data-disable-with' => "Please wait.." %>
+    <%= submit_tag t(:show_all), class: "form-control btn btn-primary inline-btn", 'data-disable-with' => "Please wait.." %>
 <% end %>
 <hr>
 
@@ -21,7 +21,7 @@
 <% @orders.each do |o|  %>
     <% total+=o.bill_value %>
 <% end %>
-<h3><%= @orders.count %> orders selected </h3>
+<h3><%= "#{@orders.count} #{t(:orders_selected)}" %>  </h3>
 <% if @start_date.present? and @end_date.present? and ((@end_date - @start_date).to_i / 1.day) > 1 %>
     <h5>Orders between <%= @start_date.strftime("%B, %-d") %> and <%= @end_date.strftime("%B, %-d") %></h5>
 <% end %>
@@ -75,13 +75,13 @@ optionsHours = {:height => "100", :scaleBeginAtZero => true}
 optionsWaiters = {:height => "100", :scaleBeginAtZero => true}
 %>
 
-<h2>Sales by weekday</h2>
+<h2><%= t(:sales_by_weekday) %></h2>
 <%= bar_chart data, options %>
 
-<h2>Sales by hour</h2>
+<h2><%= t(:sales_by_hour) %></h2>
 <%= bar_chart dataHours, optionsHours %>
 
-<h2>Sales by Waiter</h2>
+<h2><%= t(:sales_by_waiter) %></h2>
 <%= bar_chart dataWaiters, optionsWaiters %>
 	<% @orders.each do |o|  %>
 		

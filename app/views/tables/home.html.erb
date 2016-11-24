@@ -6,6 +6,14 @@
 	<img src="<%= current_client.avatar_url %>" class="img-circle navProfile">
 	<h3 style="display:inline;"><%= current_client.first_last_name %> <i class="fa fa-bars" aria-hidden="true"></i></h3>
 </div>
+<% else %>
+	<div class="mobile-profile">
+		<%= form_for([current_table,@new]) do |f| %>
+			<%= f.label t(:name) %><br>
+			<%= f.text_field :name, class: "form-control", required: true %><br>
+			<%= f.submit t(:login), class: "btn btn-primary" %>
+		<% end %>
+	</div>
 <% end %>
 
 <!-- PROFILE FOR MOBILE END -->
@@ -16,26 +24,26 @@
 	<h3> <%= current_client.first_last_name %> </h3>
 	<!-- Request Waiter -->
 	<% if current_client.table.requested %>
-		<h5>Waiter has been called</h5>
+		<h5><%= t(:waiter_called) %></h5>
 	<%else%>
 	
-	<h5><%=link_to "Call waiter", toggle_request_table_path(current_client.table,table_id: current_client.table), user: 2, method: :post %></h5>
+	<h5><%=link_to t(:call_waiter), toggle_request_table_path(current_client.table,table_id: current_client.table), user: 2, method: :post %></h5>
 	<%end%>
 
 	<!-- Request Waiter End -->
 	
 	<!-- Orders -->
 	<% if current_client.dishes.count > 0 %>
-		<h4>You've ordered:</h4>
+		<h4><%= t(:you_have_ordered) %></h4>
 		<div id="orders">
 			<% current_client.dishes.each do |d| %>
 				<h5><%= d.title %></h5>
 			<% end %>
 		</div>
-		<h4>Total: $<%= number_with_precision(current_client.bill_value, :precision => 2) %></h4>
+		<h4><%= t(:total) %>: $<%= number_with_precision(current_client.bill_value, :precision => 2) %></h4>
 	<% else %>
-		<h4>You haven't ordered anything</h4>
-		<h4>Aren't you hungry?</h4>
+		<h4><%= t(:no_orders) %></h4>
+		<h4><%= t(:hungry) %></h4>
 	<% end %>
 	<!-- Orders End -->
 
@@ -43,38 +51,33 @@
 	
 	<% if not current_client.payment_method.present? and current_client.dishes.count > 0%>
 	<br>
-		<a id="toggle-payment" class="btn btl-xs btn-success">
-					Select check out option
+		<a class="toggle-payment btn btl-xs btn-success">
+					<%= t(:select_check_out) %>
 				</a>
-		<div id="check-out">
+		<div class="check-out">
 			<%= form_tag toggle_check_out_table_client_path(current_table,current_client) do %>
-					Credit <%= radio_button_tag(:payment_method, "Credit", true,:item_wrapper_class => 'inline') %>
-					Cash <%= radio_button_tag(:payment_method, "Cash",:item_wrapper_class => 'inline') %><br>
-					<%= submit_tag 'Check out!', :class => 'btn btn-primary checkOutBtn'%>
+					<%= t(:credit) %> <%= radio_button_tag(:payment_method, t(:credit), true,:item_wrapper_class => 'inline') %>
+					<%= t(:cash) %> <%= radio_button_tag(:payment_method, t(:cash),:item_wrapper_class => 'inline') %><br>
+					<%= submit_tag t(:check_out), :class => 'btn btn-primary checkOutBtn'%>
 			<% end %>
 		</div>
 	<% elsif current_client.payment_method.present? %>
 		<div style="color:#24BD4B; margin-bottom:5px; font-size:16px;">
-			Paying with <%= current_client.payment_method %>
+			<%= "#{t(:paying_with)} #{current_client.payment_method}" %>
 		</div>
 
-		<%= link_to "Cancel Check out",cancel_check_out_table_client_path(current_table,current_client), method: :cancel_check_out, class: "btn-sm btn-danger" %>
+		<%= link_to t(:cancel_check_out),cancel_check_out_table_client_path(current_table,current_client), method: :cancel_check_out, class: "btn-sm btn-danger" %>
 		<br><br>
 	<% end %>
 
 	<!-- Check out END -->
-	<% else %>
-		<%= form_for([current_table,@new]) do |f| %>
-			<%= f.label :name %><br>
-			<%= f.text_field :name, class: "form-control", required: true %><br>
-			<%= f.submit "Login", class: "btn btn-primary" %>
-		<% end %>
+
 	<% end %>
 	<!-- Who's on the table -->
 	<% if current_table.clients.count > 1 %>
 		<hr>
 		<div class="col-xs-12 col-md-12 people-on-table">
-			Who's on the table<br>
+			<%= t(:who_is_on) %><br>
 			<% current_table.clients.each do |c| %>
 				<div class="col-xs-4">
 					<img src="<%= c.avatar_url %>" class="img-circle thumb"><br>
@@ -87,80 +90,89 @@
 	<br>
 
 	<hr>
-	Table's code: <%= current_table.code %>
+	<%= "#{t(:table_code)}: #{current_table.code}" %>
 </div>
 
 
 <!-- PROFILE FOR MOBILE END -->
 
+	
+
+
+
 
 <!-- PROFILE FOR DESKTOP -->
 <div class="col-lg-4 col-md-4" id="profile">
+
+	<% if not current_client.present? %>
+		<%= form_for([current_table,@new]) do |f| %>
+			<%= f.label t(:name) %><br>
+			<%= f.text_field :name, class: "form-control", required: true %><br>
+			<%= f.submit t(:login), class: "btn btn-primary" %>
+		<% end %>
+	<% end %>
 
 	<% if current_client.present? %><br>
 	<img src="<%= current_client.avatar_url %>" class="img-circle avatar"><br>
 	<h3> <%= current_client.first_last_name %> </h3>
 	<!-- Request Waiter -->
 	<% if current_client.table.requested %>
-		<h5>Waiter has been called</h5>
+		<h5><%= t(:waiter_called) %></h5>
 	<%else%>
 	
-	<h5><%=link_to "Call waiter", toggle_request_table_path(current_client.table,table_id: current_client.table), user: 2, method: :post %></h5>
+	<h5><%=link_to t(:call_waiter), toggle_request_table_path(current_client.table,table_id: current_client.table), user: 2, method: :post %></h5>
 	<%end%>
 
 	<!-- Request Waiter End -->
 	
 	<!-- Orders -->
 	<% if current_client.dishes.count > 0 %>
-		<h4>You've ordered:</h4>
+		<h4><%= t(:you_have_ordered) %></h4>
 		<div id="orders">
 			<% current_client.dishes.each do |d| %>
 				<h5><%= d.title %></h5>
 			<% end %>
 		</div>
-		<h4>Total: $<%= number_with_precision(current_client.bill_value, :precision => 2) %></h4>
+		<h4><%= t(:total) %>: $<%= number_with_precision(current_client.bill_value, :precision => 2) %></h4>
 	<% else %>
-		<h4>You haven't ordered anything</h4>
-		<h4>Aren't you hungry?</h4>
+		<h4><%= t(:no_orders) %></h4>
+		<h4><%= t(:hungry) %></h4>
 	<% end %>
 	<!-- Orders End -->
+
+
 
 	<!-- Check out -->
 	
 	<% if not current_client.payment_method.present? and current_client.dishes.count > 0%>
 	<br>
-		<a id="toggle-payment" class="btn btl-xs btn-success">
-					Select check out option
+		<a class="toggle-payment btn btl-xs btn-success">
+					<%= t(:select_check_out) %>
 				</a>
-		<div id="check-out">
+		<div class="check-out">
 			<%= form_tag toggle_check_out_table_client_path(current_table,current_client) do %>
-					Credit <%= radio_button_tag(:payment_method, "Credit", true,:item_wrapper_class => 'inline') %>
-					Cash <%= radio_button_tag(:payment_method, "Cash",:item_wrapper_class => 'inline') %><br>
-					<%= submit_tag 'Check out!', :class => 'btn btn-primary checkOutBtn'%>
+					<%= t(:credit) %> <%= radio_button_tag(:payment_method, t(:credit), true,:item_wrapper_class => 'inline') %>
+					<%= t(:cash) %> <%= radio_button_tag(:payment_method, t(:cash),:item_wrapper_class => 'inline') %><br>
+					<%= submit_tag t(:check_out), :class => 'btn btn-primary checkOutBtn'%>
 			<% end %>
 		</div>
 	<% elsif current_client.payment_method.present? %>
 		<div style="color:#24BD4B; margin-bottom:5px; font-size:16px;">
-			Paying with <%= current_client.payment_method %>
+			<%= "#{t(:paying_with)} #{current_client.payment_method}" %>
 		</div>
 
-		<%= link_to "Cancel Check out",cancel_check_out_table_client_path(current_table,current_client), method: :cancel_check_out, class: "btn-sm btn-danger" %>
+		<%= link_to t(:cancel_check_out),cancel_check_out_table_client_path(current_table,current_client), method: :cancel_check_out, class: "btn-sm btn-danger" %>
 		<br><br>
 	<% end %>
 
 	<!-- Check out END -->
-	<% else %>
-		<%= form_for([current_table,@new]) do |f| %>
-			<%= f.label :name %><br>
-			<%= f.text_field :name, class: "form-control", required: true %><br>
-			<%= f.submit "Login", class: "btn btn-primary" %>
-		<% end %>
+
 	<% end %>
 	<!-- Who's on the table -->
 	<% if current_table.clients.count > 1 %>
 		<hr>
 		<div class="col-xs-12 col-md-12 people-on-table">
-			Who's on the table<br>
+			<%= t(:who_is_on) %><br>
 			<% current_table.clients.each do |c| %>
 				<div class="col-xs-4">
 					<img src="<%= c.avatar_url %>" class="img-circle thumb"><br>
@@ -177,10 +189,12 @@
 
 <!-- Menu -->
 <div class="col-lg-8 col-md-8" id="menu"  onclick="closeNav()">
-	<h2>Menu</h2>
+	<h2><%= t(:menu) %></h2>
+	<% m = Menu.find_by(locale: session[:locale]) %>
 	<div id="category">
-		<% Category.all.each do |c| %>
+		<% m.categories.each do |c| %>
 			<h3><%= c.name %></h3>
+			<h4><%= c.description %></h4>
 			<table class="table table-bordered">
 			<ul class="group-list">
 
@@ -197,8 +211,8 @@
 						<%= d.description %><br>
 					</div>
 					<div class="text-left col-xl-12 col-md-12">
-					<%= link_to_if((current_client.present? and not current_client.done), "Order $#{number_with_precision(d.price, :precision => 2)}",add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: 
-	    			{ confirm: 'Confirm your order' }, :class => 'btn btn-success pull-right order-btn '){}%>
+					<%= link_to_if((current_client.present? and not current_client.done), "#{t(:order)} $#{number_with_precision(d.price, :precision => 2)}",add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: 
+	    			{ confirm: t(:confirm_order) }, :class => 'btn btn-success pull-right order-btn '){}%>
 	    			<!-- <button id="<%= d.id %>" class="toggle-details pull-right btn btn-info ">Less</button>	 -->
 					</div>
 				</td>
@@ -209,7 +223,8 @@
 		<% end %>
 	</div>
 </div><br>
-Table's code: <%= current_table.code %>
+
+<%= "#{t(:table_code)}: #{current_table.code}" %>
 <br>
 </div>
 
@@ -217,11 +232,11 @@ Table's code: <%= current_table.code %>
 
 $( document ).ready(function(){
 
-	$("#check-out").hide();
+	$(".check-out").hide();
 	// $(".dish-details-data").hide()
 
-	$("#toggle-payment").click(function(){
-	    $("#check-out").toggle("fast");
+	$(".toggle-payment").click(function(){
+	    $(".check-out").toggle("fast");
 	});
 
 	$(".toggle-details").click(function(){
