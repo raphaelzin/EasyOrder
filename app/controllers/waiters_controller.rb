@@ -17,7 +17,7 @@ class WaitersController < ApplicationController
       @waiter = Waiter.find(params[:id])
       if @waiter.update_attributes(waiter_params)
         @waiter.save
-        flash[:success] = "Employee succes34sfully edited"
+        flash[:success] = t(:waiter_edited)
         redirect_to waiters_manage_employees_path
       else
         render :edit
@@ -32,7 +32,6 @@ class WaitersController < ApplicationController
       non_waiter_redirect
   		@tables = Table.all
       session[:client_id] = nil
-
       session[:table_id] = nil
   	end
 
@@ -42,7 +41,6 @@ class WaitersController < ApplicationController
       @tables.where(requested: true).each do |table|
         calling << table.id
       end
-
       render json: calling
     end
 
@@ -61,7 +59,7 @@ class WaitersController < ApplicationController
     def destroy
       @waiter = Waiter.find(params[:id])
       @waiter.destroy
-      flash[:success] = "Employee successfully deleted"
+      flash[:success] = t(:waiter_destroyed)
       redirect_to :back
     end
 

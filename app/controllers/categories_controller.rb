@@ -17,6 +17,7 @@ class CategoriesController < ApplicationController
       @category = Category.find(params[:id])
       if @category.update_attributes(category_params)
         @category.save
+        flash[:success] = t(:category_edited)
         redirect_to admins_categories_path
       else
         redirect_to :back
@@ -25,6 +26,7 @@ class CategoriesController < ApplicationController
 
     def destroy
       @category = Category.find(params[:id])
+      flash[:success] = t(:category_deleted)
       @category.destroy
       redirect_to :back
     end

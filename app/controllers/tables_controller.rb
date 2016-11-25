@@ -18,10 +18,10 @@ class TablesController < ApplicationController
         @client.save
       end
 			session[:table_id] = @table.id
-      flash[:success] = "Welcome to table #{@table.number}"
+      flash[:success] = "#{t(:welcome_to_table)} #{@table.number}"
 			redirect_to tables_home_path
 		else
-			flash[:error] = "Incorrect code!"
+			flash[:error] = t(:incorrect_code)
 			redirect_to root_path
 		end
 	end
@@ -50,11 +50,12 @@ class TablesController < ApplicationController
   	@table = Table.new(table_params)
     begin
     	if @table.save!
+        flash[:success] = t(:table_created)
     		redirect_to admins_tables_path
     	end
       rescue ActiveRecord::RecordInvalid => e
         if e.message == "Validation failed: Number has already been taken"
-          flash[:error] = "The table's number has to be unique"
+          flash[:error] = t(:unique_table)
           redirect_to admins_tables_path
         end
     end
@@ -64,6 +65,7 @@ class TablesController < ApplicationController
     @table = Table.find(params[:id])
     if @table.update_attributes(table_params)
       @table.save
+      flash[:success] = t(:table_edited)
       redirect_to admins_tables_path
     else
       redirect_to :back
@@ -73,25 +75,24 @@ class TablesController < ApplicationController
   def finish_table
     @table = Table.find(params[:table_id])
     done = true
-
     @order = Order.new
 
     @table.clients.each do |c|
       if !c.done
         done = false
-        flash[:error] = "All clients must be done before finishing the table"
+        flash[:error] = t(:not_done_finish)
         redirect_to :back
-        return
       end
-      c.dishes.each do |d|
-        @order.dishes << d
-      end
-
-      c.dishes = []
-      c.done = false
-      flash[:success] = "Table finished"
     end
+
     if done
+      @table.clients.each do |c|
+        c.dishes.each do |d|
+          @order.dishes << d
+        end
+        c.dishes = []
+        flash[:success] = t(:table_finished)
+      end
 
       if @order.bill_value > 0
         @order.waiter = @table.waiter
@@ -121,6 +122,7 @@ class TablesController < ApplicationController
   def destroy
     @table = Table.find(params[:id])
     @table.destroy
+    flash[:success] = t(:table_destroyed)
     redirect_to :back
   end
 

@@ -2,7 +2,7 @@ class MenusController < ApplicationController
 	def create
     	@menu = Menu.new(menu_params)
     	if @menu.save
-      	flash[:success] = 'Menu added'
+      	flash[:success] = t(:menu_added)
       	redirect_to admins_dishes_path
     	end
   	end
@@ -15,6 +15,7 @@ class MenusController < ApplicationController
       @menu = Menu.find(params[:id])
       if @menu.update_attributes(menu_params)
         @menu.save
+        flash[:success] = t(:menu_edited)
         redirect_to admins_dishes_path
       else
         redirect_to :back
@@ -23,6 +24,7 @@ class MenusController < ApplicationController
 
     def destroy
       @menu = Menu.find(params[:id])
+      flash[:success] = t(:menu_destroyed)
       @manu.destroy
       redirect_to :back
     end

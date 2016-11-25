@@ -4,6 +4,7 @@ class DishesController < ApplicationController
 	def create
 		@dish = Dish.new(dish_params)
 		if @dish.save
+			flash[:success] = t(:dish_created)
 			redirect_to admins_menu_path
 		end
 	end
@@ -16,6 +17,7 @@ class DishesController < ApplicationController
 		@dish = Dish.find(params[:id])
 		if @dish.update_attributes(dish_params)
 			@dish.save
+			flash[:success] = t(:dish_edited)
 			redirect_to admins_menu_path
 		else
 			redirect_to :back
@@ -29,7 +31,7 @@ class DishesController < ApplicationController
 
 	def destroy
 	    @dish = Dish.find(params[:id])
-	    flash[:success] = 'Dish successfully removed!'
+	    flash[:success] = t(:dish_destroyed)
 	    @dish.destroy
 	    redirect_to :back
   	end

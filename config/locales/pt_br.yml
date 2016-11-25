@@ -92,9 +92,37 @@ pt_br:
  edit_menu: "Editar Menu"
  menu_you_have: "Menus e línguas"
  dishes: "Pratos"
- language: "Língua"
+ language: "Idioma"
+ languages: "Idiomas"
  locale: "Código de localização"
  category_added: "Categoria Adicionada"
+ category_edited: "Categoria editada"
+ category_destroyed: "Categoria deletada"
+ admin_created: "Administrador criado"
+ dish_ordered: "O prato foi pedido"
+ waiter_edited: "Garçon editado"
+ waiter_destroyed: "Garçon deletado"
+
+ dish_created: "Prato adicionado"
+ dish_edited: "Prato editado"
+ dish_destroyed: "Prato deletado"
+
+
+ menu_added: "Menu adicionado"
+ menu_edited: "Menu editado"
+ menu_destroyed: "Menu deletado"
+
+ welcome_to_table: "Bem vindo a mesa"
+ incorrect_code: "Código invalido!"
+ unique_table: "O número da mesa deve ser único!"
+
+ table_created: "Mesa adicionada"
+ table_destroyed: "Mesa deletada"
+ table_edited: "Mesa editada"
+
+ table_finished: "Mesa encerrada!"
+ not_done_finish: "Todos os clientes devem ter encerrado"
+
 
 
  date:

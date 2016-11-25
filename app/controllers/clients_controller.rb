@@ -22,7 +22,7 @@ class ClientsController < ApplicationController
   end
 
   def add_dish
-    flash[:success] = "Dish - wait for it -  Ordered!"
+    flash[:success] = t(:dish_ordered)
     @client = Client.find(session[:client_id])
     @dish = Dish.find(params[:dish_id])
     @client.dishes << @dish
@@ -43,7 +43,6 @@ class ClientsController < ApplicationController
     @client = @table.clients.new(client_params)
     if @client.save
       session[:client_id] = @client.id
-      flash[:message] = "Welcome"
       redirect_to :back
     else
       render 'new'

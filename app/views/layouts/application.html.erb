@@ -31,10 +31,6 @@
          <br>
       </div>
     <%end%>
-    <%= params[:locale] %>
-
-      <%= link_to "English", :locale =>'en'%>
-      <%= link_to "Português", :locale =>'pt_br'%><br>
 
     <% "Admin: #{current_admin.present?} 
      Client: #{current_client.present?}
@@ -65,6 +61,7 @@
     </script>
     <!-- Flash End -->
     <br>
-    
+
+
   </body>
 </html>

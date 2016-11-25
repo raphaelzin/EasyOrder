@@ -4,7 +4,7 @@ class AdminsController < ApplicationController
   def create
     @admin = Admin.new(admin_params)
     if @admin.save
-      flash[:success] = 'Administrator added'
+      flash[:success] = t(:admin_created)
       redirect_to root_path
     end
   end
@@ -56,7 +56,6 @@ class AdminsController < ApplicationController
 
       @orders = Order.search(@start_date, @end_date)
     end
-    flash[:success] = params[:commit]
 
     params[:start_date] = nil
     params[:end_date] = nil

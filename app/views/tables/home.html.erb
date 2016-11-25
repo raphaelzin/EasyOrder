@@ -72,10 +72,12 @@
 
 	<!-- Check out END -->
 
+	<hr>
+
 	<% end %>
 	<!-- Who's on the table -->
 	<% if current_table.clients.count > 1 %>
-		<hr>
+		
 		<div class="col-xs-12 col-md-12 people-on-table">
 			<%= t(:who_is_on) %><br>
 			<% current_table.clients.each do |c| %>
@@ -89,8 +91,15 @@
 	<!-- Who's on the table END-->
 	<br>
 
-	<hr>
+	
 	<%= "#{t(:table_code)}: #{current_table.code}" %>
+
+	<div id="languages-menu">
+		<%= t(:languages) %>:<br>
+			<% Menu.all.each do |m| %>
+				<%= link_to m.language, :locale =>m.locale%><br>
+			<% end %>
+	</div>
 </div>
 
 
@@ -190,7 +199,7 @@
 <!-- Menu -->
 <div class="col-lg-8 col-md-8" id="menu"  onclick="closeNav()">
 	<h2><%= t(:menu) %></h2>
-	<% m = Menu.find_by(locale: session[:locale]) %>
+	<% m = Menu.find_by(locale: current_locale) %>
 	<div id="category">
 		<% m.categories.each do |c| %>
 			<h3><%= c.name %></h3>
@@ -253,11 +262,11 @@ function openNav() {
 
 	if ($(window).width() <= 768 && $(window).width() > 580 )
 	{
-		document.getElementById("profileSidenav").style.width = "400px";
+		document.getElementById("profileSidenav").style.width = "450px";
 	}
  	else
  	{
- 		document.getElementById("profileSidenav").style.width = "250px";
+ 		document.getElementById("profileSidenav").style.width = "300px";
  	}
 }
 
