@@ -40,7 +40,7 @@ class Client < ApplicationRecord
 
       client.oauth_token = auth.credentials.token
       client.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      client.table = Table.find_by(number: 0)
+      client.table = Table.new
       client.save!
     end
   end

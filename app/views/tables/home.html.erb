@@ -1,11 +1,21 @@
+<!-- Waiter log client in END -->
+<% if not current_waiter.present? %>
+<div onclick="openNav()" class="mobile-profile mobile-profile-toolbar">
+	<div class="pull-left hamb-menu">
+		<h2 style="display:inline;"><i class="fa fa-bars" aria-hidden="true"></i></h2>
+	</div>
+		<img src="<%= current_client.avatar_url %>" class="img-circle navProfile">
+		<h3 style="display:inline;"><%= current_client.first_last_name %> </h3>
+
+</div>
+<% end %>
+<!-- Client toolbar -->
+
 <div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
 
-
+<!-- Waiter log client in -->
 <% if current_client.present? %>
-<div onclick="openNav()" class="mobile-profile">
-	<img src="<%= current_client.avatar_url %>" class="img-circle navProfile">
-	<h3 style="display:inline;"><%= current_client.first_last_name %> <i class="fa fa-bars" aria-hidden="true"></i></h3>
-</div>
+
 <% else %>
 	<div class="mobile-profile">
 		<%= form_for([current_table,@new]) do |f| %>
@@ -15,6 +25,10 @@
 		<% end %>
 	</div>
 <% end %>
+
+
+
+<!-- Client toolbar END -->
 
 <!-- PROFILE FOR MOBILE END -->
 <div id="profileSidenav" class="sidenav">
@@ -217,7 +231,11 @@
 					</div>
 					<div class="text-left col-xl-12 col-md-12">
 						<h3 class="line-clamp"><%= d.title %></h3>
-						<%= d.description %><br>
+
+						<div class="more">
+						<%= d.description %>
+						</div>
+
 					</div>
 					<div class="text-left col-xl-12 col-md-12">
 					<%= link_to_if((current_client.present? and not current_client.done), "#{t(:order)} $#{number_with_precision(d.price, :precision => 2)}",add_dish_table_client_path(current_table, current_client, dish_id: d.id, id: d.id), method: :post, data: 

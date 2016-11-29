@@ -45,13 +45,13 @@
         <% if flash[:success] %>
           <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Success!</strong> <%= flash[:success]%>
+            <strong><%= t(:success) %>!</strong> <%= flash[:success]%>
           </div>
         <%end%>
         <% if flash[:error] %>
           <div class="alert alert-danger">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Error!</strong> <%= flash[:error]%><br>
+            <strong><%= t(:error) %>!</strong> <%= flash[:error]%><br>
           </div>
         <%end%>
       </div>

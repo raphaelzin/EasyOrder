@@ -35,7 +35,7 @@
 
 <%
 data = {
-  labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satursday"],
+  labels: I18n.t(:"date.day_names"),
   datasets: [
     {
         label: "Total sold By week day",
@@ -84,9 +84,9 @@ optionsWaiters = {:height => "100", :scaleBeginAtZero => true}
 <h2><%= t(:sales_by_waiter) %></h2>
 <%= bar_chart dataWaiters, optionsWaiters %>
 	<% @orders.each do |o|  %>
-		
+		<!-- .strftime("%T - %B, %-d - %Y ") -->
 		<% o.inspect %><br>	
-		Order created at: <%= o.created_at.localtime.strftime("%T - %B, %-d - %Y ") %><br>
+		Order created at: <%= I18n.l o.created_at.localtime, :format => "%T - %B, %-d - %Y " %><br>
 		<% o.dishes.each do |d|%>
 			<%= d.title %><br>
 		<% end %>

@@ -23,7 +23,7 @@
 </table>
 <!-- <hr> -->
 <% end %>
-
+<% if Menu.count != 0 %>
 <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#AddModal"><%= t(:add_category) %></button><br><br>
 
 <div id="AddModal" class="modal fade" role="dialog">
@@ -39,6 +39,8 @@
     </div>
   </div>
 </div>
-
+<% else %>
+	<h3><%= t(:add_menu_first) %></h3>
+<% end %>
 
 </div>

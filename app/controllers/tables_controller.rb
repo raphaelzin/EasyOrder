@@ -1,5 +1,13 @@
 class TablesController < ApplicationController
 
+  # def index
+  #   @tables = Table.all
+  #   respond_to do |format|
+  #     format.html
+  #     format.json { render :json => @tables.to_json }
+  #   end
+  # end 
+
   def welcome
     if current_client.present? and current_table.present?
       redirect_to tables_home_path

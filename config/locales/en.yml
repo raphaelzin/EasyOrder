@@ -140,3 +140,10 @@ en:
   not_done_finish: "All clients must be done before finishing the table"
   table_finished: "Table finished"
 
+  add_category_first: "You must have at least one category to add a dish"
+  add_menu_first: "You must have at least one menu to add a category"
+  success: "Success"
+  error: "Error"
+
+
+

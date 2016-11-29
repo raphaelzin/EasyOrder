@@ -1,9 +1,10 @@
 class MenusController < ApplicationController
 	def create
     	@menu = Menu.new(menu_params)
+      @menu.locale = @menu.locale.downcase
     	if @menu.save
       	flash[:success] = t(:menu_added)
-      	redirect_to admins_dishes_path
+      	redirect_to admins_menu_path
     	end
   	end
 
@@ -14,9 +15,10 @@ class MenusController < ApplicationController
     def update
       @menu = Menu.find(params[:id])
       if @menu.update_attributes(menu_params)
+        @menu.locale = @menu.locale.downcase
         @menu.save
         flash[:success] = t(:menu_edited)
-        redirect_to admins_dishes_path
+        redirect_to admins_menu_path
       else
         redirect_to :back
       end
@@ -25,7 +27,7 @@ class MenusController < ApplicationController
     def destroy
       @menu = Menu.find(params[:id])
       flash[:success] = t(:menu_destroyed)
-      @manu.destroy
+      @menu.destroy
       redirect_to :back
     end
 

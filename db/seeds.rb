@@ -22,7 +22,6 @@ waiter = Waiter.create :name => "Aline Forest", :password => "123", :cpf => "291
 waiter = Waiter.create :name => "Stafford Gardener", :password => "123", :cpf => "22349567000100", :phone => "(11) 2020-3639"
 waiter = Waiter.create :name => "Raphael Souza", :password => "ana", :cpf => "30853166000111", :phone => "(11) 5964-6454"
 
-table = Table.create :code => "asgrg", :number => 0, :waiter_id => 1, :id => 1
 table = Table.create :code => "asgrg", :number => 1, :waiter_id => 1, :id => 2
 table = Table.create :code => "one", :number => 2, :waiter_id => 2, :id => 3
 table = Table.create :code => "sadgasdg", :number => 3, :waiter_id => 3, :id => 4

@@ -21,7 +21,7 @@ class AdminsController < ApplicationController
 
     @new = Category.new
     @categories = Category.all
-    @menu = Menu.find(1)
+    @menu = Menu.first
   end
 
   def home
@@ -37,8 +37,8 @@ class AdminsController < ApplicationController
 
     @new = Dish.new
     @dishes = Dish.all
-    @category = Category.find(1)
-    @menu = Menu.find(1)
+    @category = Category.first
+    @menu = Menu.first
 
   end
 
