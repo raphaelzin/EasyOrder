@@ -50,9 +50,19 @@
 
 body
 {
-	background-color: #5780E9;
 	font-family: 'Varela Round', sans-serif;
-	/*#36d17f*/
+	/*background-color: #5780E9;*/
+	/*background-color: #15161C;*/
+
+	/*1fc8db*/
+	background: #1fc8db; /* fallback for old browsers */
+
+	background: linear-gradient(to left, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+	background: -webkit-linear-gradient(to left, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); /* Chrome 10-25, Safari 5.1-6 */
+	/*background: -webkit-linear-gradient(to left, #314755 , #26a0da); /* Chrome 10-25, Safari 5.1-6 */*/
+	/*background: linear-gradient(to left, #314755 , #26a0da);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
 	color: #000;
 
 }
@@ -86,7 +96,6 @@ body
 	height: 100px;
 	width: 100px;
 }
-
 
 hr
 {

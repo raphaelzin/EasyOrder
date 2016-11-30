@@ -32,10 +32,12 @@
       </div>
     <%end%>
 
-    <% "Admin: #{current_admin.present?} 
+    <div style="color:#fff;">    
+      <% "Admin: #{current_admin.present?} 
      Client: #{current_client.present?}
      Waiter: #{current_waiter.present?} 
      Table: #{current_table.present?}" %>
+   </div>
 
     <%= yield %>
 
