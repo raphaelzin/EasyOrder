@@ -64,6 +64,7 @@ class AdminsController < ApplicationController
   end
 
   def settings
+    nonAdminRedirect
     @new = Admin.new
     @admins = Admin.all
   end
@@ -111,6 +112,12 @@ class AdminsController < ApplicationController
     totalHours
   end
 
+  def set_language
+    I18n.default_locale = params[:language]
+    session[:locale] = params[:language]
+    redirect_to :back
+  end
+
   def value_for_waiter(orders)
     totalHash = Hash.new
     Waiter.all.each do |w|
@@ -131,11 +138,9 @@ class AdminsController < ApplicationController
 
 
       @dish1 = Dish.find( 1 + rand(10) )
-
       @dish2 = Dish.find( 1+rand(10) )
 
       @waiter = Waiter.find( 1 + rand(6) )
-
       @order = Order.new
 
       @order.dishes << @dish1

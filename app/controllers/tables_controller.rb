@@ -110,9 +110,17 @@ class TablesController < ApplicationController
 
       @table.clients = []
       @table.requested = false
+
       # Generate a random word with 8 characters
-      o = [('1'..'9'),('a'..'z')].map { |i| i.to_a }.flatten
-      @table.code = (0...8).map { o[rand(o.length)] }.join
+      while true do
+        o = [('1'..'9'),('a'..'z')].map { |i| i.to_a }.flatten
+        newCode = (0...8).map { o[rand(o.length)] }.join  
+        if not Table.find_by(code: newCode)
+          break
+        end
+      end
+
+      @table.code = newCode
       # End
 
       @table.save

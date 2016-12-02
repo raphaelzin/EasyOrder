@@ -1,9 +1,8 @@
 <%= form_for @new do |f| %>
 	<%= f.label :name %><br>
-	<%= f.text_field :name %><br>
-	<br>
+	<%= f.text_field :name, class: "form-control" %><br>
 	<%= f.label :password %><br>
-	<%= f.password_field :password, required: true %><br>
-	<br>
-	<%= f.submit %>
+	<%= f.password_field :password, required: true, class: "form-control" %><br>
+	
+	<%= f.submit "Add Admin", class: "form-control btn btn-primary" %>
 <% end %>

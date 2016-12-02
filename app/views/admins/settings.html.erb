@@ -1,4 +1,21 @@
-<h1>Admins#settings</h1>
-<p>Find me in app/views/admins/settings.html.erb</p>
-<h2>Create Admin</h2>
-<%= render 'new_admin' %>
+<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-xs-12">
+	<h1>Admins Settings</h1>
+	<h3>Create Admin</h3>
+	<%= render 'new_admin' %><br>
+
+	<h3>Set Default Language</h3>
+	
+	<%= form_tag set_language_admin_path(current_admin) do %>
+
+		
+		<%= radio_button_tag(:language, "es_mx", true) %> Español<br>
+		
+		<%= radio_button_tag(:language, "pt_br", true) %> Português<br>
+		
+		<%= radio_button_tag(:language, "en", true) %> English<br>
+		
+		<%= submit_tag "Set Language", :class => 'btn btn-primary'%>
+
+	<% end %>
+
+</div>

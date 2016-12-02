@@ -54,11 +54,10 @@ body
 	/*background-color: #5780E9;*/
 	/*background-color: #15161C;*/
 
-	/*1fc8db*/
 	background: #1fc8db; /* fallback for old browsers */
 
-	background: linear-gradient(to left, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-	background: -webkit-linear-gradient(to left, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) fixed;
+	background: -webkit-linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) fixed; /* Chrome 10-25, Safari 5.1-6 */
 	/*background: -webkit-linear-gradient(to left, #314755 , #26a0da); /* Chrome 10-25, Safari 5.1-6 */*/
 	/*background: linear-gradient(to left, #314755 , #26a0da);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
@@ -143,10 +142,18 @@ hr
 	margin-top:0;
 	background-color:#fff;
 	border-radius:4px;
-	border: 3px solid #DDD;
+	/*border: 3px solid #DDD;*/
 	padding:10px 10px 10px 10px;
 	margin:2px;
 	display: inline-block;
+
+	box-shadow: 4px 8px 16px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.tableCard:hover
+{
+	box-shadow: 8px 16px 32px 0 rgba(0,0,0,0.2);
 }
 
 .calling
@@ -210,13 +217,29 @@ button
 	width: 150px;
 	margin: 10px;
 	border-radius: 6px;
-	border-style: solid;
-	border-width: 2px;
-	border-color: #5780E9;
+	/*border-style: solid;*/
+	/*border-width: 2px;*/
+	/*border-color: #2cb5e8;*/
 
 	padding-left: 0px;
 	padding-right: 0px;
+
+	color: #2cb5e8;
+
+	box-shadow: 4px 8px 16px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
 }
+
+.homeCard:hover {
+    box-shadow: 8px 16px 32px 0 rgba(0,0,0,0.2);
+    /*height: 204px;*/
+	/*width: 180px;*/
+}
+
+/*table { box-sizing: border-box; }*/
+/*td, th { padding-left: 16px; min-width: 170px; text-align: left; }*/
+/*tr { display: block; }*/
+/*tr:hover { box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.5); }*/
 
 #orders
 {

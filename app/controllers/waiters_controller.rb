@@ -30,7 +30,7 @@ class WaitersController < ApplicationController
 
   	def tables
       non_waiter_redirect
-  		@tables = Table.all
+  		@tables = Table.order("number asc")
       session[:client_id] = nil
       session[:table_id] = nil
   	end

@@ -38,19 +38,24 @@ Rails.application.routes.draw do
   resources :tables do
     post :toggle_request, on: :member
     post :finish_table, on: :member
+
   	resources :clients do
+
   		post :add_dish, on: :member
       post :remove_dish, on: :member
       
       post :toggle_check_out, on: :member
       post :cancel_check_out, on: :member
       post :toggle_done, on: :member
+
   	end
   end
 
 
   resources :client_sessions
-  resources :admins
+  resources :admins do
+    post :set_language, on: :member
+  end
   resources :waiters
 	resources :sessions
 	resources :admin_sessions
