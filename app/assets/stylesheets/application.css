@@ -14,6 +14,7 @@
  *= require bootstrap.min
  *= require font-awesome
  *= require bootstrap-social
+ *= require sweet-alert
  *= require_self
  */
 
@@ -58,6 +59,8 @@ body
 
 	background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) fixed;
 	background: -webkit-linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) fixed; /* Chrome 10-25, Safari 5.1-6 */
+	top:0; left:0;
+	z-index:-1;
 	/*background: -webkit-linear-gradient(to left, #314755 , #26a0da); /* Chrome 10-25, Safari 5.1-6 */*/
 	/*background: linear-gradient(to left, #314755 , #26a0da);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
@@ -312,7 +315,7 @@ button
 	padding: 10px;
 }
 
-.toggle-show
+.toggle-show 
 {
 	display: block;
 	margin-right: auto;
@@ -320,6 +323,9 @@ button
 	text-align: center;
 
 }
+
+
+
 .toggle-show:hover
 {
 	cursor:pointer;
@@ -373,10 +379,13 @@ tr
     
     background-color: #15161C;
     color: #fff;
-    overflow-x: hidden; /* Disable horizontal scroll */
+    
     padding-top: 10px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-    
+
+    overflow-x: hidden;
+    overflow: auto;
+    /*overflow-y: hidden;*/
 }
 
 /* The navigation menu links */
@@ -404,7 +413,7 @@ tr
     
 }
 
-.sidenav a
+.sidenav-link
 {
 	color:#e9573f;
 	text-decoration: underline;
@@ -427,10 +436,15 @@ tr
 }
 
 .mobile-profile-toolbar
-	{
-		background-color: #fff;
-		margin-bottom: 10px;
-	}
+{
+	background-color: #fff;
+	margin-bottom: 10px;
+}
+
+.toggle-payment
+{
+	color: #fff;
+}
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
@@ -475,6 +489,10 @@ tr
     display: block;
 }
 
+.btn
+{
+	color: #FFF;
+}
 
 /*SMARTPHONE*/
 @media only screen and (max-width: 992px)
@@ -781,9 +799,4 @@ tr
 	{
 		display: block;
 	}
-
-
-
 }
-
-

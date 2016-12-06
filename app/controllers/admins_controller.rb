@@ -72,7 +72,7 @@ class AdminsController < ApplicationController
   def tables
     nonAdminRedirect
     @new = Table.new
-    @tables = Table.all
+    @tables = Table.order("number asc")
   end
 
   def nonAdminRedirect
@@ -134,13 +134,13 @@ class AdminsController < ApplicationController
 
   def create_random_data
 
-    for i in 0..80
+    for i in 0..180
 
 
-      @dish1 = Dish.find( 1 + rand(10) )
-      @dish2 = Dish.find( 1+rand(10) )
+      @dish1 = Dish.find( 1+rand(Dish.count) )
+      @dish2 = Dish.find( 1+rand(Dish.count) )
 
-      @waiter = Waiter.find( 1 + rand(6) )
+      @waiter = Waiter.find( 1 + rand(Waiter.count) )
       @order = Order.new
 
       @order.dishes << @dish1

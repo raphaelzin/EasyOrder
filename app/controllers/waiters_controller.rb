@@ -59,8 +59,13 @@ class WaitersController < ApplicationController
     def destroy
       @waiter = Waiter.find(params[:id])
       @waiter.destroy
-      flash[:success] = t(:waiter_destroyed)
-      redirect_to :back
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.json { head :no_content }
+        format.js   { render :layout => false }
+     end
+      # flash[:success] = t(:waiter_destroyed)
+      # redirect_to :back
     end
 
     def non_waiter_redirect

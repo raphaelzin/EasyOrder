@@ -1,13 +1,5 @@
 class TablesController < ApplicationController
 
-  # def index
-  #   @tables = Table.all
-  #   respond_to do |format|
-  #     format.html
-  #     format.json { render :json => @tables.to_json }
-  #   end
-  # end 
-
   def welcome
     if current_client.present? and current_table.present?
       redirect_to tables_home_path
@@ -33,8 +25,6 @@ class TablesController < ApplicationController
 			redirect_to root_path
 		end
 	end
-
-  
 
   def home
   	@new = Client.new
@@ -111,17 +101,8 @@ class TablesController < ApplicationController
       @table.clients = []
       @table.requested = false
 
-      # Generate a random word with 8 characters
-      while true do
-        o = [('1'..'9'),('a'..'z')].map { |i| i.to_a }.flatten
-        newCode = (0...8).map { o[rand(o.length)] }.join  
-        if not Table.find_by(code: newCode)
-          break
-        end
-      end
-
-      @table.code = newCode
-      # End
+      
+      @table.set_code
 
       @table.save
       redirect_to waiters_tables_path
@@ -138,13 +119,16 @@ class TablesController < ApplicationController
   def destroy
     @table = Table.find(params[:id])
     @table.destroy
-    flash[:success] = t(:table_destroyed)
-    redirect_to :back
+    # flash[:success] = t(:table_destroyed)
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :no_content }
+      format.js   { render :layout => false }
+   end
   end
 
-
   def table_params
-  	params.require(:table).permit(:id, :code, :number, :waiter_id, :requested)
+  	params.require(:table).permit(:code, :number, :waiter_id, :requested)
   end 
 
 end

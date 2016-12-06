@@ -42,7 +42,7 @@
 		<h5><%= t(:waiter_called) %></h5>
 	<%else%>
 	
-	<h5><%=link_to t(:call_waiter), toggle_request_table_path(current_client.table,table_id: current_client.table), user: 2, method: :post %></h5>
+	<h5><%=link_to t(:call_waiter), toggle_request_table_path(current_client.table,table_id: current_client.table), user: 2, method: :post, class: "sidenav-link" %></h5>
 	<%end%>
 
 	<!-- Request Waiter End -->
@@ -66,14 +66,15 @@
 	
 	<% if not current_client.payment_method.present? and current_client.dishes.count > 0%>
 	<br>
-		<a class="toggle-payment btn btl-xs btn-success">
+		<a class="toggle-payment btn btl-xs btn-success" style="color: #fff;">
 					<%= t(:select_check_out) %>
 				</a>
 		<div class="check-out">
 			<%= form_tag toggle_check_out_table_client_path(current_table,current_client) do %>
 					<%= t(:credit) %> <%= radio_button_tag(:payment_method, t(:credit), true,:item_wrapper_class => 'inline') %>
-					<%= t(:cash) %> <%= radio_button_tag(:payment_method, t(:cash),:item_wrapper_class => 'inline') %><br>
+					<%= t(:cash) %> <%= radio_button_tag(:payment_method, t(:cash),:item_wrapper_class => 'inline md-radio-button') %><br>
 					<%= submit_tag t(:check_out), :class => 'btn btn-primary checkOutBtn'%>
+
 			<% end %>
 		</div>
 	<% elsif current_client.payment_method.present? %>
@@ -81,7 +82,7 @@
 			<%= "#{t(:paying_with)} #{current_client.payment_method}" %>
 		</div>
 
-		<%= link_to t(:cancel_check_out),cancel_check_out_table_client_path(current_table,current_client), method: :cancel_check_out, class: "btn-sm btn-danger" %>
+		<%= link_to t(:cancel_check_out),cancel_check_out_table_client_path(current_table,current_client), method: :cancel_check_out, class: "btn-sm btn-danger btn" %>
 		<br><br>
 	<% end %>
 
@@ -112,7 +113,7 @@
 	<div id="languages-menu">
 		<%= t(:languages) %>:<br>
 			<% Menu.all.each do |m| %>
-				<%= link_to m.language, :locale =>m.locale%><br>
+				<%= link_to m.language, :locale =>m.locale, class: "sidenav-link"%><br>
 			<% end %>
 	</div>
 </div>
@@ -244,14 +245,13 @@
 		<% end %>
 	</div>
 </div><br>
-
-<%= "#{t(:table_code)}: #{current_table.code}" %>
 <br>
 </div>
 
 <script>
 
 $( document ).ready(function(){
+
 
 	$(".check-out").hide();
 	// $(".dish-details-data").hide()
@@ -270,11 +270,13 @@ $( document ).ready(function(){
 });
 
 /* Set the width of the side navigation to 250px */
+
 function openNav() {
 
 	if ($(window).width() <= 768 && $(window).width() > 580 )
 	{
 		document.getElementById("profileSidenav").style.width = "450px";
+		
 	}
  	else
  	{

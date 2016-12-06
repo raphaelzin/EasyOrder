@@ -4,7 +4,7 @@
 <%= f.number_field :number, :step => 1, min: 1, required: true, class: "form-control"%>
 <br>
 <%= f.label t(:code) %><br>
-<%= f.text_field :code, required: true, class: "form-control"%>
+<%= f.text_field :code, required: true, value: @new.set_code, class: "form-control"%>
 <br>
 <%= f.label :waiter, t(:waiter_assigned) %>
   <br>

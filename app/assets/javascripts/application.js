@@ -15,7 +15,8 @@
 //= require turbolinks
 //= require bootstrap.min
 //= require Chart.bundle.min
-
+//= require sweet-alert
+//= require sweet-alert-confirm
 //= require jquery.turbolinks
 //= require_tree .
 
