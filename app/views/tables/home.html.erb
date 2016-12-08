@@ -6,16 +6,15 @@
 			<i class="fa fa-bars" aria-hidden="true"></i>
 		</h2>
 	</div>
-	<img src="<%= current_client.avatar_url %>" class="img-circle navProfile">
+	<img src="<%= current_client.avatar_url %>" class="img-circle toolbar-user-image">
 	<h3 style="display:inline;">
 		<%= current_client.first_last_name %> 
-		
 	</h3>
 </div>
 <% end %>
 <!-- Client toolbar -->
 
-<div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 tableHome">
+<div id="container-table" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1  tableHome">
 
 <!-- Waiter log client in -->
 
@@ -207,22 +206,22 @@
 
 <!-- Menu -->
 <div class="col-lg-8 col-md-8" id="menu"  onclick="closeNav()">
-	<h2><%= t(:menu) %></h2>
+	
 	<% m = Menu.find_by(locale: current_locale) %>
 	<div id="category">
 		<% m.categories.each do |c| %>
-			<h3><%= c.name %></h3>
+			<h2 class="category-title"><%= c.name %></h2>
 			<h4><%= c.description %></h4>
-			<table class="table table-bordered">
-			<ul class="group-list">
+			<table class="table table-borderless category-table">
+
 
 			<% c.dishes.each do |d| %>
 
 			<!-- Dish -->
 			<tr id="dish-<%= d.id %>-details" class="dish-details-data">
 				<td class="menuData">
-					<div class="col-xl-12 col-md-12">
-						<%= image_tag d.picture.url, class: "dishPictureHome img-circle" %>
+					<div class="col-xl-12 col-md-12 dish-frame">
+						<%= image_tag d.picture.url, class: "dish-picture-home " %>
 					</div>
 					<div class="text-left col-xl-12 col-md-12">
 						<h3 class="line-clamp"><%= d.title %></h3>
@@ -251,22 +250,10 @@
 <script>
 
 $( document ).ready(function(){
-
-
 	$(".check-out").hide();
-	// $(".dish-details-data").hide()
-
 	$(".toggle-payment").click(function(){
 	    $(".check-out").toggle("fast");
 	});
-
-	$(".toggle-details").click(function(){
-		var dishID = $(this).attr("id");
-		$("#dish-" + dishID + "-row").toggle();
-	    $("#dish-" + dishID + "-details").toggle("fast");
-	   
-	});
-
 });
 
 /* Set the width of the side navigation to 250px */
@@ -278,9 +265,13 @@ function openNav() {
 		document.getElementById("profileSidenav").style.width = "450px";
 		
 	}
- 	else
- 	{
+ 	if ($(window).width() < 580  && $(window).width() > 300 )
+ 	{ 
  		document.getElementById("profileSidenav").style.width = "300px";
+ 	}
+ 	if ($(window).width() < 300 )
+	{ 
+ 		document.getElementById("profileSidenav").style.width = "100%";
  	}
 }
 

@@ -28,45 +28,46 @@
 	display: none;
 }
 
-#footer {
-   position:fixed;
-   left:0px;
-   bottom:0px;
-   height:30px;
-   width:100%;
-   background:#fff;
-}
-
-.flag
-{
-	height: 25px;
-	width: auto;
-}
-
-/* IE 6 */
-* html #footer {
-   position:absolute;
-   top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
-}
-
 body
 {
 	font-family: 'Varela Round', sans-serif;
-	/*background-color: #5780E9;*/
-	/*background-color: #15161C;*/
-
 	background: #1fc8db; /* fallback for old browsers */
 
 	background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) fixed;
 	background: -webkit-linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) fixed; /* Chrome 10-25, Safari 5.1-6 */
 	top:0; left:0;
 	z-index:-1;
-	/*background: -webkit-linear-gradient(to left, #314755 , #26a0da); /* Chrome 10-25, Safari 5.1-6 */*/
-	/*background: linear-gradient(to left, #314755 , #26a0da);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 
 	color: #000;
 
+}
+
+tr td:first-child {
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+
+}
+
+tr td:last-child {
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+
+.table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+    border: none;
 }
 
 #stats-container
@@ -175,6 +176,17 @@ hr
 }
 
 #container
+{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	overflow: hidden;
+	background-color: #FFF;
+	border-radius: 16px;
+	transition: margin-left .5s;
+    padding: 20px;
+}
+
+#container-table
 {
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -355,12 +367,6 @@ tr
 
 #languages-menu
 {
-	/*position: absolute; 
-    bottom: 0; 
-    width: 100%; 
-    height: 50px;
-	*/
-
 	margin-top: 40px;
 	padding-bottom: 15px;
 }
@@ -397,20 +403,9 @@ tr
     transition: 0.2s
 }
 
-/* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .offcanvas a:focus{
     color: #f1f1f1;
 
-}
-
-/* Position and style the close button (top right corner) */
-
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#container {
-    transition: margin-left .5s;
-    padding: 20px;
-    
 }
 
 .sidenav-link
@@ -429,33 +424,18 @@ tr
     color:#fff;
 }
 
-.sidenav #orders
-{
-	width: 95%;
-	
-}
+
 
 .mobile-profile-toolbar
 {
 	background-color: #fff;
 	margin-bottom: 10px;
+		height: 45px;
 }
 
-.toggle-payment
-{
-	color: #fff;
-}
+.sidenav #orders { width: 95%; }
+.toggle-payment { color: #fff; }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}
-
-@media screen and (max-height: 768px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}
 
 .navProfile
 {
@@ -494,15 +474,18 @@ tr
 	color: #FFF;
 }
 
-/*SMARTPHONE*/
-@media only screen and (max-width: 992px)
+.toolbar-user-image
 {
-	h1{}
+	height: 40px;
+	width: 40px;
+	margin-top: 2.5px;
+}
 
-	.details-btn
-	{
-		display:none;
-	}
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
+/*SMARTPHONE*/
+
+@media only screen and (max-width: 992px) {
 
 	#container
 	{
@@ -510,10 +493,23 @@ tr
 		margin-right: 40px;
 	}
 
-	.dishPictureHome
+	#container-table
 	{
-		padding-left: 15px;
-		margin-right: 0px;
+		background-color: transparent;
+		padding: 10px;
+		margin: 5px;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+
+	.dish-picture-home
+	{
+
+		margin-left: 0px;
+		width: 100%;
+		height: 350px;
+		border-radius: 6px 6px 0 0;
+		object-fit:cover;
 	}
 
 	#profile
@@ -526,6 +522,7 @@ tr
 	{
 		height: auto;
 		overflow-y: scroll;
+		border-left: none;
 	}
 
 	.tableHome
@@ -557,6 +554,7 @@ tr
 		height: 100px;
 		width: 100px;
 	}
+
 	#profile
 	{
 		display: none;
@@ -566,44 +564,50 @@ tr
 		display: block;
 		text-align: center;
 	}
+	
+	.dish-details-data
+	{
+		background-color: #fff;
+		box-shadow: 4px 8px 16px 0 rgba(0,0,0,0.2);
+		width: 400px;
+	}
 }
 
-@media only screen and (max-width: 768px)
-{
-	h1{	}
+@media only screen and (max-width: 768px) {
+
 	#container
+	{
+		width: 100%;
+		padding-left: 20px;
+		padding-right: 20px;
+		margin: 5px;
+	}
+
+	#container-table
 	{
 		padding: 10px;
 		margin: 5px;
+		margin-left: 20px;
+		margin-right: 20px;
 	}
 
 	.tableHome
 	{
 		height: auto;
 	}
-/*	#profile
-	{
-		margin-left: auto;
-		margin-right: auto;
-		display: block;
-		width: 50%;
-	}*/
 
 	#profile
 	{
 		height: auto;
 		overflow-y: scroll;
-	}
-
-	#container
-	{
-		padding: 10px;
+		display: none;
 	}
 
 	#menu
 	{
 		height: auto;
 		overflow-y: scroll;
+		border-left: none;
 	}
 
 	#orders
@@ -629,42 +633,95 @@ tr
 		margin-right: auto;
 	}
 
-	.dishPictureHome
+	.dish-frame
 	{
-		padding-left: 15px;
-		margin-right: 0px;
+
+		height: 350px;
+		margin-top: -8px;		
+		margin-right: -8px;
+		margin-left: -8px;
+
+		padding-left: 0px;
+		padding-right: 0px;
+		text-align: center;
+
+			
+		width: -moz-calc(100vw - 30px);
+		width: -webkit-calc(100vw - 30px);
+		width: -o-calc(100%vw- 30px);
+		width: calc(100vw - 30px);
+
 	}
 
-	.dishPicture
+	.dish-picture-home
 	{
-		height: 100px;
-		width: 100px;
+
+		margin-left: 0px;
+		width: 100%;
+		height: 350px;
+		border-radius: 6px 6px 0 0;
+		object-fit:cover;
 	}
-	.details-btn
-	{
-		display:none;
-	}
-	.dishPictureHome
-	{
-		padding-left: 0px;
-		margin-right: 0px;
-	}
-	#profile
-	{
-		display: none;
-	}
+
 	.mobile-profile
 	{
 		display: block;
 	}
+
+	#container-table
+	{
+		background-color: transparent;
+		padding: 0px;
+		margin: 0px;
+	}
+
+	.dish-details-data
+	{
+		background-color: #fff;
+		box-shadow: 4px 8px 16px 0 rgba(0,0,0,0.2);
+	}
+
+
+	#category
+	{
+		padding-left: 0px;
+	}
+
+	.category-title
+	{
+		color: #2cb5e8;
+		text-align: center;
+		vertical-align: middle;
+		height: 55px;
+
+		width: 100vw;
+		background-color: #fff;
+
+	    display:flex;
+	    align-items: center;
+	    justify-content: center;
+
+		box-shadow: 4px 8px 16px 4px rgba(0,0,0,0.2);
+	}
+
+	#menu
+	{
+		height: auto;
+		padding: 0px;
+		overflow-y: scroll;
+		border-left: none;
+		background-color: transparent;
+	}
+
+	.category-table
+	{
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+
 }
 
-
-
-
-@media only screen and (max-width: 480px)
-{
-	h1{}
+@media only screen and (max-width: 480px){
 
 	body
 	{
@@ -672,9 +729,12 @@ tr
 		padding-right: 0px;
 	}
 
-	#dish-buttons
+
+	.tr-menu
 	{
-		margin-top: -15px;
+		margin: 10px;
+		border-radius: 6px;
+		box-shadow: 4px 8px 16px 0 rgba(0,0,0,0.2);
 	}
 
 	#dish-text
@@ -684,13 +744,7 @@ tr
 
 	#category
 	{
-		padding-left: 5px;
-	}
-
-	.dishPicture
-	{
-		height: 100px;
-		width: 100px;
+		padding-left: 0px;
 	}
 
 	.detailImages
@@ -701,22 +755,20 @@ tr
 
 	#container
 	{
-		/*padding: 10px;*/
-		/*margin: 5px;*/
-
 		border-radius: 0;
 		padding: 0px 5px 0px 5px;
-
 		margin: 0px;
 		width: 100%;
 	    height: 100%;
 	}
 
-	.dishPictureHome
+	#container-table
 	{
-		padding-left: 0px;
-		margin-right: 0px;
+		background-color: transparent;
+		padding: 0px;
+		margin: 0px;
 	}
+
 
 	.order-btn
 	{
@@ -734,6 +786,8 @@ tr
 	.tableHome
 	{
 		height: auto;
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 
 	.tableCard
@@ -757,6 +811,7 @@ tr
 		padding: 0px;
 		overflow-y: scroll;
 		border-left: none;
+		background-color: transparent;
 	}
 
 	#profile
@@ -764,6 +819,7 @@ tr
 		margin-left: 0px;
 		height: auto;
 		overflow-y: scroll;
+		display: none;
 	}
 
 	h3
@@ -778,6 +834,7 @@ tr
 	.dish-details-data
 	{
 		background-color: #fff;
+		box-shadow: 4px 8px 16px 0 rgba(0,0,0,0.2);
 	}
 
 	.details-btn
@@ -791,12 +848,8 @@ tr
 		font-size: 16px;
 	}
 
-	#profile
+	.dish-frame, .dish-picture-home
 	{
-		display: none;
-	}
-	.mobile-profile
-	{
-		display: block;
+		height: 200px;
 	}
 }

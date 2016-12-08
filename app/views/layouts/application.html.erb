@@ -7,15 +7,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
 
-      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-
-  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-  <!-- Angular Material Library -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-
     <!-- Fonts -->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -23,23 +14,8 @@
   </head>
 
   <body>
-    <% if current_admin.present? %>
-      <div id="toolbar">
-        <%= "#{t(:logged_as)}: #{current_admin.name} (#{t(:admin)})" %> - 
-        <%= link_to t(:admin_home), admins_home_path %> / 
-         <%= link_to t(:tables), waiters_tables_path %> / <%= link_to t(:sign_out), admin_sign_out_path, method: :delete %>
-         <br>
-      </div>
-    <% end %>
-
-    <% if current_waiter.present? and not current_admin.present?%>
-      <div id="toolbar">
-        <%= "#{t(:logged_as)}: #{current_waiter.name}" %> - 
-        <%= link_to t(:sign_out), sign_out_path, method: :delete %>
-         / <%= link_to t(:tables), waiters_tables_path %>
-         <br>
-      </div>
-    <%end%>
+    
+    <%= render "layouts/toolbar" %>
 
     <div style="color:#fff;">    
       <% "Admin: #{current_admin.present?} 
@@ -50,28 +26,7 @@
 
     <%= yield %>
 
-    <!-- Flash -->
-    <% if flash[:success] or flash[:error] %>
-      <div id="message">
-        <% if flash[:success] %>
-          <div class="alert alert-success">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong><%= t(:success) %>!</strong> <%= flash[:success]%>
-          </div>
-        <%end%>
-        <% if flash[:error] %>
-          <div class="alert alert-danger">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong><%= t(:error) %>!</strong> <%= flash[:error]%><br>
-          </div>
-        <%end%>
-      </div>
-    <% end %>
-    <script>
-      alertMessage();
-    </script>
-    <!-- Flash End -->
-    <br>
+    <%= render "layouts/alerts" %>
 
 
   </body>
