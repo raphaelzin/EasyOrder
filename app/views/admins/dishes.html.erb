@@ -4,10 +4,14 @@
 
 <% if m.categories.count == 0 then next end  %>
 
-<h2><%= "- #{m.language} (#{m.locale}) -" %></h2>
+<h2><%= "#{m.language} (#{m.locale})" %></h2>
+<a id="<%= m.id %>" class="toggle-show pull-right" style="display:inline">Hide/Show</a>
+
 <% m.categories.each do |c| %>
-<h3><%= c.name %></h3>
-<table class="table table-bordered col-xs-12">
+<h3><%= " - #{c.name} (#{c.dishes.count}) - " %></h3>
+
+
+<table class="table table-bordered menu-content table col-xs-12 " id="menu-<%= m.id %>-content">
 
 	<% c.dishes.each do |d| %>
 		<tr>
@@ -52,3 +56,13 @@
 	<h3><%= t(:add_category_first) %></h3>
 <% end %>
 </div>
+
+<script>
+
+$( document ).ready(function(){
+	$(".toggle-show").click(function(){
+		var id = $(this).attr("id");
+	    $("#menu-" + id + "-content").toggle();
+	});
+});
+</script>

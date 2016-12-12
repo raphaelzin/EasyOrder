@@ -11,8 +11,6 @@ def create
     end
   end
 
-  
-
   def destroy
     reset_session
     redirect_to waiters_login_path, notice: 'Bye!'

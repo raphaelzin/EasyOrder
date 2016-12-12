@@ -211,7 +211,7 @@
 	<div id="category">
 		<% m.categories.each do |c| %>
 			<h2 class="category-title"><%= c.name %></h2>
-			<h4><%= c.description %></h4>
+			<!-- <h4><% c.description %></h4> -->
 			<table class="table table-borderless category-table">
 
 
@@ -281,3 +281,10 @@ function closeNav() {
 }
 
 </script>
+
+<style>
+table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+</style>

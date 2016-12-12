@@ -1,14 +1,22 @@
 <div id="container" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <h2><%= t(:categories_you_have) %></h2>
+<br>
 <!-- <hr> -->
 <% Menu.all.each do |m| %>
-<h3><%= m.language %></h3>
-<table class="table table-bordered">
+<br>
+<h3 style="display:inline;"><%= "#{m.language} (#{m.categories.count})" %></h3>
+
+<% if m.categories.count > 0 %>
+<a id="<%= m.id %>" class="toggle-show pull-right" style="display:inline">Hide/Show</a>
+<% end %>
+
+<table id="menu-<%= m.id %>-content" class="menu-content table table-bordered ">
+	<br><br>
 	<% m.categories.each do |c| %>
 		<tr>
 			<td>
 				<div class="text-left col-xl-6 col-md-6">
-					<%= c.name %><br>
+					<h3 class="no-margin"><%= c.name %></h3>
 					<%= c.description %>
 				</div>
 
@@ -21,7 +29,7 @@
 		</tr>
 	<% end %>
 </table>
-<!-- <hr> -->
+<hr>
 <% end %>
 <% if Menu.count != 0 %>
 <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#AddModal"><%= t(:add_category) %></button><br><br>
@@ -44,3 +52,13 @@
 <% end %>
 
 </div>
+
+<script>
+
+$( document ).ready(function(){
+	$(".toggle-show").click(function(){
+		var id = $(this).attr("id");
+	    $("#menu-" + id + "-content").toggle();
+	});
+});
+</script>
