@@ -12,6 +12,7 @@
 				<div class="text-left col-xl-6 col-md-6">
 					<%= t(:table) %>: <%= t.number %><br>
 					<%= t(:table_code) %>: <%= t.code %><br>
+					Table's waiter: <%= t.waiter.name %>
 				</div>
 				<div class="text-left col-xl-6 col-md-6">
 				<%= link_to t(:delete), table_path(t), :method => :delete, data: {confirm: 'Are you sure you want to delete this Table?'}, :remote => true, class: "btn btn-danger pull-right delete_table"%>

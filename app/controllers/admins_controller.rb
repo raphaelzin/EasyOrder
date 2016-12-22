@@ -49,7 +49,9 @@ class AdminsController < ApplicationController
 
   def stats
     nonAdminRedirect
+    
     @orders = Order.all
+
     if (params[:start_date].present? and params[:start_date][0] != "") && (params[:end_date].present? and params[:end_date][0] != "")
       @start_date = params[:start_date][0].to_date.beginning_of_day
       @end_date = params[:end_date][0].to_date.end_of_day

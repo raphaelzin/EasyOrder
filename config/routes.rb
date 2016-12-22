@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'admins/staff'
 
+  get 'waiters/kitchen'
+
   get 'admins/categories'
 
   get 'admins/menu'
@@ -25,6 +27,8 @@ Rails.application.routes.draw do
 
   get 'waiters/tables'
 
+  get 'waiters/kitchen'
+
   root 'tables#welcome'
 
   post 'tables/redirect_to_table' => 'tables#redirect_to_table'
@@ -34,13 +38,13 @@ Rails.application.routes.draw do
 
   get "waiters/tables_calling"
   get "waiters/clients_checking_out"
+  get "waiters/table_served"
 
   resources :tables do
     post :toggle_request, on: :member
     post :finish_table, on: :member
 
   	resources :clients do
-
   		post :add_dish, on: :member
       post :remove_dish, on: :member
       
@@ -72,5 +76,4 @@ Rails.application.routes.draw do
     root to: "tables#welcome"
 end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

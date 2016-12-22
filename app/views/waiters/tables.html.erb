@@ -28,10 +28,10 @@
 					<% link_to "Delete client", table_client_path(t,c), method: :delete %>
 
 					<div class="tableOrders">
-						<% c.dishes.each do |d| %>
-							<%= d.title %>
-								<% d.price %>
-								<%= link_to t(:delete), remove_dish_table_client_path(t,client_id: c,dish_id: d, id: d.id), method: :post, data: {confirm: t(:delete_dish_from_client)}, class: "pull-right"%> 
+						<% c.order_tags.each do |o| %>
+							<%= o.dish.title %>
+							<% o.dish.price %>
+							<%= link_to t(:delete), remove_dish_table_client_path(t,tag: o, id:o.client.id), method: :post, data: {confirm: t(:delete_dish_from_client)}, class: "pull-right"%> 
 							<br>
 						<% end %>
 					</div>
@@ -60,6 +60,11 @@
 		</div> <!-- Tables --> 
 	<%end%>
 <%end%> <!-- t defined end -->
+<br>
+<% OrderTag.all.each do |o| %>
+	<%= o.inspect %><br>
+<% end %>
+
 
 <script type="text/javascript">
 setInterval( updateTables , 5000);

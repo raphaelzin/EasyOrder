@@ -1,5 +1,7 @@
 class Client < ApplicationRecord
-	has_and_belongs_to_many :dishes
+	has_many :dishes, :through => :order_tags
+  has_many :order_tags
+
 	belongs_to :table
 
 	def bill_value
@@ -37,6 +39,7 @@ class Client < ApplicationRecord
       client.provider = auth.provider
       client.uid = auth.uid
       client.name = auth.info.name
+      client.email = auth.info.email
 
       client.oauth_token = auth.credentials.token
       client.oauth_expires_at = Time.at(auth.credentials.expires_at)

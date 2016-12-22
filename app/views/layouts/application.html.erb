@@ -14,7 +14,11 @@
   </head>
 
   <body>
-    
+    <%= javascript_tag do %>
+     $(function() {
+       $("time.timeago").timeago();
+     });
+   <% end %>
     <%= render "layouts/toolbar" %>
 
     <div style="color:#fff;">    

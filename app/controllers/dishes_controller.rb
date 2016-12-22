@@ -18,7 +18,7 @@ class DishesController < ApplicationController
 		if @dish.update_attributes(dish_params)
 			@dish.save
 			flash[:success] = t(:dish_edited)
-			redirect_to admins_menu_path
+			redirect_to admins_dishes_path
 		else
 			redirect_to :back
 		end

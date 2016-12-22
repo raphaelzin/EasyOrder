@@ -5,15 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Admin.destroy_all
-Waiter.destroy_all
-Category.destroy_all
-Dish.destroy_all
-Client.destroy_all
-Table.destroy_all
 
 admin = Admin.create :name => "Master", :password => "bolaazul"
-menu = Menu.create :language => "English"
+menu = Menu.create :language => "English", :locale => "en"
 
 waiter = Waiter.create :name => "Floyd Glass", :password => "123", :cpf => "73726742000172", :phone => "(71) 8202-7484"
 waiter = Waiter.create :name => "Humphrey Parris", :password => "123", :cpf => "52468603000116", :phone => "(85) 9753-6983"

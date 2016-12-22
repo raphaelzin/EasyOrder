@@ -12,7 +12,10 @@
     <%= submit_tag t(:search), class: "form-control btn btn-primary", 'data-disable-with' => "Please wait.." %>
 <% end %>
 
+<% text_field :start_date, params[:show_all], :value => "show" %> 
+
 <%= form_tag admins_stats_path, :method => 'get', class: "form-inline inline-btn" do%>
+
     <%= submit_tag t(:show_all), class: "form-control btn btn-primary inline-btn", 'data-disable-with' => "Please wait.." %>
 <% end %>
 <hr>
@@ -25,9 +28,9 @@
 <% if @start_date.present? and @end_date.present? and ((@end_date - @start_date).to_i / 1.day) > 1 %>
     <h5>Orders between <%= @start_date.strftime("%B, %-d") %> and <%= @end_date.strftime("%B, %-d") %></h5>
 <% end %>
-<h4>Total: $<%= number_with_precision(total, :precision => 2)%>
+<h4>Total: <%= number_to_currency(total)%>
     <% if @start_date.present? and @end_date.present? and ((@end_date - @start_date).to_i / 1.day) > 1 %>
-    - <%= number_with_precision(total / ((@end_date - @start_date).to_i / 1.day), :precision => 2) %>/day
+    - <%= number_to_currency(total / ((@end_date - @start_date).to_i / 1.day)) %>/day
     <% end %>
 </h4>
 <hr>
@@ -76,13 +79,13 @@ optionsWaiters = {:height => "100", :scaleBeginAtZero => true}
 %>
 
 <h2><%= t(:sales_by_weekday) %></h2>
-<%= bar_chart data, options %>
+<%= line_chart data, options %>
 
 <h2><%= t(:sales_by_hour) %></h2>
-<%= bar_chart dataHours, optionsHours %>
+<%= line_chart dataHours, optionsHours %>
 
 <h2><%= t(:sales_by_waiter) %></h2>
-<%= bar_chart dataWaiters, optionsWaiters %>
+<%= line_chart dataWaiters, optionsWaiters %>
 	<% @orders.each do |o|  %>
 		<!-- .strftime("%T - %B, %-d - %Y ") -->
 		<% o.inspect %><br>	
@@ -93,7 +96,7 @@ optionsWaiters = {:height => "100", :scaleBeginAtZero => true}
         <% total += o.bill_value %>
 		<br>
         
-		Total: $<%= number_with_precision(o.bill_value, :precision => 2) %>
+		Total: <%= number_to_currency(o.bill_value) %>
         <hr>
 	<% end %><br>
     <hr>

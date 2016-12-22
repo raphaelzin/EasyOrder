@@ -1,0 +1,24 @@
+<div style="text-align:center;" id="kitchen-orders">
+	<% @tags.each do |t| %>
+		<%= render 'tag', :t => t %>
+	<% end %>
+</div>
+
+
+<script>	
+	timeAgo();
+	setInterval( timeAgo , 10000);
+
+	function timeAgo()
+	{
+		$(".timeAgo").each(function(index){
+			console.log($(this).attr("data-time"));
+			var dateVar = $(this).attr("data-time");
+			var d = new Date(dateVar);
+			var dif = Math.round(((new Date()) - d)/60000);
+			$(this).empty();
+			$(this).append("(" + dif + " minutes ago)");
+		});
+	}
+
+</script>

@@ -11,6 +11,10 @@ class Table < ApplicationRecord
 		total
 	end
 
+	def initialize(attributes={})
+		super
+		self.set_code
+	end
 
 	def set_code
 		# Generate a random word with 8 characters

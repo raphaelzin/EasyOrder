@@ -1,0 +1,14 @@
+<div class="kitchen-card" style="text-align:left">
+	<h3><%= t.dish.title %> - <%= t.dish.category.name %></h3>
+	<h5>Table: <%= t.client.table.number %></h5>
+
+	Ordered at 
+	<%= I18n.l t.created_at.localtime, :format => "%T" %>
+	<span class="timeAgo" data-time="<%= t
+	.created_at.localtime %>"></span>
+
+
+	 <%= link_to_if(!t.served,"Set as served", waiters_table_served_path(id: Waiter.first, tag: t) ,class: "btn btn-success pull-right"){} %>
+
+	 <%= link_to_if(t.served,"Set as not served", waiters_table_served_path(id: Waiter.first, tag: t) ,class: "btn btn-success pull-right"){} %>
+</div>

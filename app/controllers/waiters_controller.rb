@@ -1,6 +1,6 @@
 class WaitersController < ApplicationController
 	
-	def create
+  	def create
     	@waiter = Waiter.new(waiter_params)
     
     	if @waiter.save
@@ -8,6 +8,18 @@ class WaitersController < ApplicationController
       	redirect_to admins_staff_path
     	end
   	end
+
+    def kitchen
+      # @tags = OrderTag.where("created_at > ?", Time.at(params["after"].to_i + 1)).order("created_at ASC")
+      @tags = OrderTag.order("created_at ASC")
+    end
+
+    def table_served
+      @tag = OrderTag.find(params[:tag])
+      @tag.served = !@tag.served
+      @tag.save
+      redirect_to :back
+    end
 
     def edit
       @waiter = Waiter.find(params[:id])

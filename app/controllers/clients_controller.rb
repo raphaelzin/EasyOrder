@@ -25,17 +25,21 @@ class ClientsController < ApplicationController
     flash[:success] = t(:dish_ordered)
     @client = Client.find(session[:client_id])
     @dish = Dish.find(params[:dish_id])
+
+
     @client.dishes << @dish
+    
+    # @tag = OrderTag.create(:client => @client.id, :dish => @dish.id)
+    # @tag.save
+
     @client.save
     redirect_to tables_home_path(@client.table)
   end
 
   def remove_dish
-    @client = Client.find(params[:client_id])
-    @dish = Dish.find(params[:dish_id])
+    @tag = OrderTag.find(params[:tag])
+    @tag.destroy
 
-    @client.dishes.delete(@dish)
-    @client.save
     redirect_to :back
   end
 

@@ -18,7 +18,24 @@
 //= require sweet-alert
 //= require sweet-alert-confirm
 //= require jquery.turbolinks
+//= require jquery.timeago
 //= require_tree .
+
+// $(function () {
+//   if ($('#kitchen-orders').length > 0) {
+//     setTimeout(updateOrders, 1000);
+//   }
+// });
+
+// function updateOrders() {
+//   if ($('.kitchen-card').length > 0) {
+//      var after = $('.kitchen-card:last').attr('data-time');
+//   }else{
+//     var after = 0;
+//   }
+//   $.getScript('/kitchen-orders.js?after=' + after);
+//   setTimeout(updateOrders, 1000);
+// }
 
 function alertMessage()
 {
